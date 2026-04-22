@@ -29,6 +29,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/ # Folder hasil build Vite
-          server-dir: ./     # Karena FTP tadi sudah diarahkan ke public_html
-          dangerous-clean-slate: false # Set true jika ingin hapus file lama yang gak ada di dist (hati-hati!)
+          local-dir: ./dist/
+          server-dir: ./ 
+          port: 21            # Tambahkan port secara eksplisit
+          protocol: ftp       # Coba paksa gunakan ftp biasa (lebih stabil untuk beberapa cPanel)
+          timeout: 60000      # Tambahkan timeout agar tidak cepat putus
