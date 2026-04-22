@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../assets/images/0/9696670/LOGO-NUANSA-LEGAL.jpeg';
+import { useImages } from '../hooks/useImages';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { images } = useImages('other');
+  const logo = images.find(img => img.name.includes('LOGO-NUANSA-LEGAL'))?.url || '';
   const location = useLocation();
 
   useEffect(() => {
@@ -38,10 +40,12 @@ const Header: React.FC = () => {
               whileHover={{ rotate: 5, scale: 1.05 }}
               className="relative"
             >
-              <img src={logo} alt="PT. Nuansa Berkah Sejahtera" className="h-10 md:h-12 w-auto rounded-xl shadow-lg border border-white/20" />
+              {logo && (
+                <img src={logo} alt="PT. Nuansa Berkah Sejahtera" className="h-10 md:h-12 w-auto rounded-xl shadow-lg border border-white/20" />
+              )}
             </motion.div>
             <span className={`font-sen font-black text-xl md:text-2xl transition-colors duration-300 ${textColorClass}`}>
-              PT. Nuansa <span className="text-primary">Berkah</span> Sejahtera
+              PT. NUANSA <span className="text-primary">BERKAH SEJAHTERA</span>
             </span>
           </Link>
 

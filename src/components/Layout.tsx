@@ -11,19 +11,20 @@ const Layout: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow">
-        <AnimatePresence mode="wait">
+      <main className="flex-grow overflow-hidden">
+        <AnimatePresence>
           <motion.div
             key={location.pathname}
-            initial={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 1.02, filter: "blur(4px)" }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
             transition={{
-              duration: 0.4,
-              ease: [0.22, 1, 0.36, 1]
+              duration: 0.3,
+              ease: "easeOut"
             }}
-            className="w-full h-full"
+            className="w-full"
           >
+
             <Outlet />
           </motion.div>
         </AnimatePresence>

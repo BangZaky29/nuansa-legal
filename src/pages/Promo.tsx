@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, Calendar, Download, Share2, ImageOff, MessageSquare } from 'lucide-react';
 import SEO from '../components/SEO';
 
-// Scanning all images in the .promo directory recursively
-const allPromoModules = import.meta.glob('../assets/images/.promo/**/*.{jpg,jpeg,png,webp,svg}', { eager: true });
+import { useImages } from '../hooks/useImages';
 
 const monthNames = [
   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
@@ -16,18 +15,18 @@ const Promo: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentPromos, setCurrentPromos] = useState<{ src: string; title: string; order: number }[]>([]);
 
-  // Body scroll lock with improved compatibility
+  // Body scroll lock optimized to prevent layout shifts
   useEffect(() => {
     if (selectedImage) {
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
+      document.body.style.paddingRight = 'var(--scrollbar-width, 0px)';
     } else {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
+      document.body.style.paddingRight = '';
     }
     return () => {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
+      document.body.style.paddingRight = '';
     };
   }, [selectedImage]);
 
@@ -35,94 +34,37 @@ const Promo: React.FC = () => {
   const now = new Date();
   const currentYear = now.getFullYear();
   const currentMonthName = monthNames[now.getMonth()];
+  const currentPeriod = `${currentYear}/${currentMonthName}`;
+
+  const { images: promoImages, loading } = useImages('promo', currentPeriod);
 
   useEffect(() => {
-    const filteredPromos = Object.entries(allPromoModules)
-      .filter(([path]) => {
-        return path.includes(`/${currentYear}/`) && path.includes(`/${currentMonthName}/`);
-      })
-      .map(([path, module]: [string, any]) => {
-        const fullFilename = path.split('/').pop() || '';
-        let cleanName = fullFilename.replace(/\.[^/.]+$/, "");
-        
-        // Remove sequence numbers or timestamps if they exist (e.g., "1_2026...")
-        if (/^\d+_/.test(cleanName)) {
-          cleanName = cleanName.split('_').slice(1).join('_');
-        }
-        
-        if (cleanName.includes('-')) {
-          cleanName = cleanName.split('-')[0];
-        }
+    if (loading) return;
 
-        // Determine category for sorting: Pendirian first (1), Pembuatan second (2)
+    const filteredPromos = promoImages
+      .map((img) => {
         let categoryOrder = 99;
-        if (path.includes('/Pendirian_legalitas/')) categoryOrder = 1;
-        else if (path.includes('/Pembuatan_legalitas/')) categoryOrder = 2;
+        if (img.sub_category === 'Pendirian Legalitas') categoryOrder = 1;
+        else if (img.sub_category === 'Pembuatan Legalitas') categoryOrder = 2;
 
         return {
-          src: module.default,
-          title: cleanName.replace(/_/g, ' ').replace(/([A-Z])/g, ' $1').trim(),
-          order: categoryOrder
+          src: img.url,
+          title: img.name.replace(/_/g, ' ').replace(/-/g, ' '),
+          order: categoryOrder,
+          subCategory: img.sub_category
         };
       })
       .sort((a, b) => a.order - b.order);
 
     setCurrentPromos(filteredPromos);
-  }, [currentYear, currentMonthName]);
+  }, [promoImages, loading]);
+
 
   const pendirianPromos = currentPromos.filter(p => p.order === 1);
   const pembuatanPromos = currentPromos.filter(p => p.order === 2);
-  const otherPromos = currentPromos.filter(p => p.order === 99);
 
-  const PromoGrid = ({ items, title, subtitle }: { items: typeof currentPromos, title: string, subtitle?: string }) => (
-    <div className="mb-20 last:mb-0">
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        className="mb-10 flex items-center gap-4"
-      >
-        <div className="h-12 w-2 bg-primary rounded-full"></div>
-        <div>
-          <h2 className="text-2xl md:text-4xl font-sen font-bold text-secondary">{title}</h2>
-          {subtitle && <p className="text-gray-500 mt-1">{subtitle}</p>}
-        </div>
-      </motion.div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {items.map((img, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
-            whileHover={{ y: -10 }}
-            className="group cursor-pointer"
-            onClick={() => setSelectedImage(img.src)}
-          >
-            <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl bg-white border border-gray-100">
-              <img
-                src={img.src}
-                alt={img.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="text-primary font-bold text-sm mb-1">{currentMonthName} {currentYear}</p>
-                    <h3 className="text-white font-sen font-bold text-xl">{img.title}</h3>
-                  </div>
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-secondary shadow-lg">
-                    <ZoomIn size={24} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
+
+
 
   return (
     <div className="pt-24 md:pt-32 pb-20 bg-gray-50 min-h-screen overflow-x-hidden">
@@ -159,6 +101,9 @@ const Promo: React.FC = () => {
                 items={pendirianPromos}
                 title="Pendirian Legalitas"
                 subtitle="Penawaran spesial untuk pendirian badan usaha Anda."
+                onImageSelect={setSelectedImage}
+                currentMonthName={currentMonthName}
+                currentYear={currentYear}
               />
             )}
 
@@ -167,13 +112,9 @@ const Promo: React.FC = () => {
                 items={pembuatanPromos}
                 title="Pembuatan Legalitas"
                 subtitle="Layanan pembuatan dokumen hukum dan Izin Operasional SBUJK (Konstruksi)."
-              />
-            )}
-
-            {otherPromos.length > 0 && (
-              <PromoGrid
-                items={otherPromos}
-                title="Promo Lainnya"
+                onImageSelect={setSelectedImage}
+                currentMonthName={currentMonthName}
+                currentYear={currentYear}
               />
             )}
           </div>
@@ -325,3 +266,75 @@ const Promo: React.FC = () => {
 };
 
 export default Promo;
+
+// Move PromoGrid outside to prevent re-renders when parent state (selectedImage) changes
+interface PromoItem {
+  src: string;
+  title: string;
+  order: number;
+}
+
+const PromoGrid = ({ 
+  items, 
+  title, 
+  subtitle, 
+  onImageSelect,
+  currentMonthName,
+  currentYear 
+}: { 
+  items: PromoItem[], 
+  title: string, 
+  subtitle?: string,
+  onImageSelect: (src: string) => void,
+  currentMonthName: string,
+  currentYear: number
+}) => (
+  <div className="mb-20 last:mb-0">
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      className="mb-10 flex items-center gap-4"
+    >
+      <div className="h-12 w-2 bg-primary rounded-full"></div>
+      <div>
+        <h2 className="text-2xl md:text-4xl font-sen font-bold text-secondary">{title}</h2>
+        {subtitle && <p className="text-gray-500 mt-1">{subtitle}</p>}
+      </div>
+    </motion.div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {items.map((img, idx) => (
+        <motion.div
+          key={img.src + idx}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: idx * 0.1 }}
+          whileHover={{ y: -10 }}
+          className="group cursor-pointer"
+          onClick={() => onImageSelect(img.src)}
+        >
+          <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl bg-white border border-gray-100">
+            <img
+              src={img.src}
+              alt={img.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-primary font-bold text-sm mb-1">{currentMonthName} {currentYear}</p>
+                  <h3 className="text-white font-sen font-bold text-xl">{img.title}</h3>
+                </div>
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-secondary shadow-lg">
+                  <ZoomIn size={24} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+);
+

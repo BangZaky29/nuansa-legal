@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Globe, MessageSquare, Camera, Mail, Phone, MapPin } from 'lucide-react';
-import logo from '../assets/images/0/9696670/LOGO-NUANSA-LEGAL.jpeg';
+import { useImages } from '../hooks/useImages';
 
 const Footer: React.FC = () => {
+  const { images } = useImages('other');
+  const logo = images.find(img => img.name.includes('LOGO-NUANSA-LEGAL'))?.url || '';
   const currentYear = new Date().getFullYear();
 
   return (
@@ -13,8 +15,10 @@ const Footer: React.FC = () => {
           {/* Brand Column */}
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-2">
-              <img src={logo} alt="PT. Nuansa Berkah Sejahtera" className="h-12 w-auto rounded-lg" />
-              <span className="font-sen font-bold text-2xl text-white">PT. Nuansa Berkah Sejahtera</span>
+              {logo && (
+                <img src={logo} alt="PT. NUANSA BERKAH SEJAHTERA" className="h-12 w-auto rounded-lg" />
+              )}
+              <span className="font-sen font-bold text-2xl text-white">PT. NUANSA BERKAH SEJAHTERA</span>
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Solusi hukum terpercaya untuk kebutuhan bisnis dan perizinan Anda di Indonesia. Profesional, cepat, dan transparan.
@@ -121,7 +125,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
-          <p>© {currentYear} PT. Nuansa Berkah Sejahtera. All rights reserved.</p>
+          <p>© {currentYear} PT. NUANSA BERKAH SEJAHTERA. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>

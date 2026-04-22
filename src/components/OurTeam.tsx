@@ -2,8 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Camera, MessageCircle } from 'lucide-react';
 
-// Dynamically scanning team images
-const teamModules = import.meta.glob('../assets/images/.team-nuansa/*.{jpg,jpeg,png,webp,svg}', { eager: true });
+import { useImages } from '../hooks/useImages';
 
 interface TeamMember {
   name: string;
@@ -31,10 +30,13 @@ const teamSocials: Record<string, { ig: string; wa: string }> = {
 const OurTeam: React.FC = () => {
   const [members, setMembers] = useState<TeamMember[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { images: teamImages, loading } = useImages('team');
 
   useEffect(() => {
-    const parsedMembers = Object.entries(teamModules).map(([path, module]: [string, any]) => {
-      const filename = path.split('/').pop()?.split('.')[0] || '';
+    if (loading) return;
+
+    const parsedMembers = teamImages.map((img) => {
+      const filename = img.name.split('.')[0] || '';
       let name = '';
       let role = '';
 
@@ -43,7 +45,6 @@ const OurTeam: React.FC = () => {
         name = parts[0].replace(/_/g, ' ');
         role = parts[1].replace(/_/g, ' ');
       } else {
-        // Fallback for names like Vikri_Firdaus_Founder
         const lastUnderscore = filename.lastIndexOf('_');
         if (lastUnderscore !== -1) {
           name = filename.substring(0, lastUnderscore).replace(/_/g, ' ');
@@ -54,26 +55,24 @@ const OurTeam: React.FC = () => {
         }
       }
 
-      // Match social data
       const social = teamSocials[name] || 
                     Object.entries(teamSocials).find(([k]) => name.includes(k))?.[1];
 
       return {
         name,
         role,
-        image: module.default || module,
+        image: img.url,
         instagram: social?.ig,
         whatsapp: social?.wa
       };
     });
 
-    // Sort to keep Founder at the beginning if needed
     setMembers(parsedMembers.sort((a, b) => {
       if (a.role.toLowerCase().includes('founder')) return -1;
       if (b.role.toLowerCase().includes('founder')) return 1;
       return a.name.localeCompare(b.name);
     }));
-  }, []);
+  }, [teamImages, loading]);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {

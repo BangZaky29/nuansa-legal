@@ -8,7 +8,7 @@ const KontakKami: React.FC = () => {
     <div className="pt-24 md:pt-32 pb-20 bg-gray-50 overflow-x-hidden min-h-screen">
       <SEO 
         title="Hubungi Kami - Konsultasi Legalitas Gratis"
-        description="Punya pertanyaan seputar pendirian PT, CV, atau izin usaha? Hubungi tim ahli PT. Nuansa Berkah Sejahtera sekarang untuk konsultasi gratis dan respon cepat."
+        description="Punya pertanyaan seputar pendirian PT, CV, atau izin usaha? Hubungi tim ahli PT. NUANSA BERKAH SEJAHTERA sekarang untuk konsultasi gratis dan respon cepat."
       />
 
       <div className="container mx-auto px-4 md:px-6">
@@ -113,12 +113,14 @@ const KontakKami: React.FC = () => {
                         <Camera size={20} />
                       </motion.div>
                     </a>
-                    <motion.div 
-                      whileHover={{ y: -5, backgroundColor: 'var(--color-primary)', color: 'var(--color-secondary)' }}
-                      className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-all cursor-pointer"
-                    >
-                      <MessageSquare size={20} />
-                    </motion.div>
+                    <a href="https://wa.me/6289644448721" target="_blank" rel="noopener noreferrer">
+                      <motion.div 
+                        whileHover={{ y: -5, backgroundColor: 'var(--color-primary)', color: 'var(--color-secondary)' }}
+                        className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-all cursor-pointer"
+                      >
+                        <MessageSquare size={20} />
+                      </motion.div>
+                    </a>
                   </div>
                 </div>
                 <div className="ml-auto text-right">

@@ -6,11 +6,15 @@ import FAQ from '../components/FAQ';
 import OurTeam from '../components/OurTeam';
 import SEO from '../components/SEO';
 
-// Import images
-import heroBg from '../assets/images/0/6031498/office_3_1.jpg';
-import aboutImg from '../assets/images/0/7199740/how-we-started.jpg';
+import { useImages } from '../hooks/useImages';
 
 const Home: React.FC = () => {
+  const { images: heroImages } = useImages('hero');
+  const { images: aboutImages } = useImages('about');
+
+  const heroBg = heroImages.length > 0 ? heroImages[0].url : '';
+  const aboutImg = aboutImages.length > 0 ? aboutImages[0].url : '';
+
   const stats = [
     { label: 'Klien Puas', value: '500+', icon: <Users className="text-primary" /> },
     { label: 'Proyek Selesai', value: '1.2k+', icon: <Briefcase className="text-primary" /> },
@@ -43,18 +47,20 @@ const Home: React.FC = () => {
     <div className="flex flex-col">
       <SEO 
         title="Beranda" 
-        description="PT. Nuansa Berkah Sejahtera adalah solusi terpercaya untuk pendirian PT, CV, Yayasan, dan perizinan usaha di Indonesia. Cepat, tepat, dan transparan."
+        description="PT. NUANSA BERKAH SEJAHTERA adalah solusi terpercaya untuk pendirian PT, CV, Yayasan, dan perizinan usaha di Indonesia. Cepat, tepat, dan transparan."
       />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={heroBg} 
-            alt="PT. Nuansa Berkah Sejahtera Office" 
-            className="w-full h-full object-cover"
-          />
+          {heroBg && (
+            <img 
+              src={heroBg} 
+              alt="PT. NUANSA BERKAH SEJAHTERA Office" 
+              className="w-full h-full object-cover"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-transparent"></div>
         </div>
 
@@ -73,7 +79,7 @@ const Home: React.FC = () => {
                 Dengan Pondasi <span className="text-primary italic">Legal</span> Yang Kuat
               </h1>
               <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl font-light">
-                PT. Nuansa Berkah Sejahtera hadir sebagai mitra strategis dalam mengurus segala kebutuhan perizinan dan hukum perusahaan Anda. Cepat, tepat, dan tanpa ribet.
+                PT. NUANSA BERKAH SEJAHTERA hadir sebagai mitra strategis dalam mengurus segala kebutuhan perizinan dan hukum perusahaan Anda. Cepat, tepat, dan tanpa ribet.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/layanan" className="bg-primary hover:bg-primary-dark text-secondary font-black py-4 px-10 rounded-xl shadow-2xl transition-all transform hover:-translate-y-1 flex items-center gap-2">
@@ -166,14 +172,12 @@ const Home: React.FC = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-secondary mb-4">{service.title}</h3>
                   <p className="text-gray-600 leading-relaxed mb-8">{service.desc}</p>
-                  <a 
-                    href={waUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link 
+                    to="/layanan"
                     className="text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition-colors cursor-pointer"
                   >
                     Selengkapnya <ArrowRight size={18} />
-                  </a>
+                  </Link>
                 </motion.div>
               );
             })}
@@ -192,12 +196,14 @@ const Home: React.FC = () => {
               className="relative"
             >
               <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl">
-                <img 
-                  src={aboutImg} 
-                  alt="Tentang PT. Nuansa Berkah Sejahtera" 
-                  className="w-full h-auto" 
-                  loading="lazy"
-                />
+                {aboutImg && (
+                  <img 
+                    src={aboutImg} 
+                    alt="Tentang PT. NUANSA BERKAH SEJAHTERA" 
+                    className="w-full h-auto" 
+                    loading="lazy"
+                  />
+                )}
               </div>
               <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-primary/10 rounded-full z-0 blur-3xl"></div>
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-secondary/10 rounded-full z-0 blur-3xl"></div>
@@ -217,7 +223,7 @@ const Home: React.FC = () => {
               <div>
                 <h2 className="text-3xl md:text-5xl font-sen font-bold text-secondary mb-6">Mitra Terpercaya Pendirian Usaha Anda</h2>
                 <p className="text-gray-600 text-lg leading-relaxed">
-                  PT. Nuansa Berkah Sejahtera didirikan dengan visi untuk menyederhanakan proses legalitas di Indonesia. Kami percaya bahwa setiap pengusaha berhak mendapatkan kemudahan dalam memulai dan menjalankan bisnis mereka.
+                  PT. NUANSA BERKAH SEJAHTERA didirikan dengan visi untuk menyederhanakan proses legalitas di Indonesia. Kami percaya bahwa setiap pengusaha berhak mendapatkan kemudahan dalam memulai dan menjalankan bisnis mereka.
                 </p>
               </div>
 

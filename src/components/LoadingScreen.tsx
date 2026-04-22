@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import logoNuansa from '../assets/images/96x96/9746242/LOGONUANSALEGAL.png';
+import { useImages } from '../hooks/useImages';
 
 const LoadingScreen: React.FC = () => {
+  const { images } = useImages('other');
+  const logoNuansa = images.find(img => img.name === 'LOGO-NUANSA-LEGAL')?.url || '';
   // Loading state is handled in App.tsx to control 5s delay
 
   return (
@@ -60,11 +62,13 @@ const LoadingScreen: React.FC = () => {
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"
             />
 
-            <img
-              src={logoNuansa}
-              alt="PT. Nuansa Berkah Sejahtera"
-              className="w-full h-full object-contain relative z-10"
-            />
+            {logoNuansa && (
+              <img
+                src={logoNuansa}
+                alt="PT. Nuansa Berkah Sejahtera"
+                className="w-full h-full object-contain relative z-10"
+              />
+            )}
           </motion.div>
         </motion.div>
 

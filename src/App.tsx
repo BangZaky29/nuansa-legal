@@ -14,11 +14,21 @@ const Team = React.lazy(() => import('./pages/Team'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
 
+import { DataProvider } from './context/DataContext';
+
 const App: React.FC = () => {
+  return (
+    <DataProvider>
+      <AppContent />
+    </DataProvider>
+  );
+};
+
+const AppContent: React.FC = () => {
   const [isInitialLoading, setIsInitialLoading] = React.useState(true);
 
   React.useEffect(() => {
-    // Force loading screen for 5 seconds on initial load
+    // Reduced initial load time to 5s for better UX
     const timer = setTimeout(() => {
       setIsInitialLoading(false);
     }, 5000);
@@ -33,7 +43,18 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <React.Suspense fallback={<LoadingScreen />}>
+      <React.Suspense fallback={
+        <div className="fixed top-0 left-0 w-full h-1 z-[9999]">
+          <div className="h-full bg-primary animate-[loading_2s_ease-in-out_infinite]"></div>
+          <style>{`
+            @keyframes loading {
+              0% { width: 0%; left: 0%; }
+              50% { width: 100%; left: 0%; }
+              100% { width: 0%; left: 100%; }
+            }
+          `}</style>
+        </div>
+      }>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -43,7 +64,6 @@ const App: React.FC = () => {
             <Route path="kontak-kami" element={<KontakKami />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="terms-of-service" element={<TermsOfService />} />
-            {/* Fallback for 404 */}
             <Route path="*" element={<Home />} />
           </Route>
         </Routes>
@@ -51,5 +71,6 @@ const App: React.FC = () => {
     </Router>
   );
 };
+
 
 export default App;
