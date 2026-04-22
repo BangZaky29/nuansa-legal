@@ -1,0 +1,34 @@
+name: Deploy Website to cPanel
+
+on:
+  push:
+    branches:
+      - main  # Ganti 'master' jika branch utama kamu namanya master
+
+jobs:
+  web-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Sesuaikan dengan versi node kamu
+
+      - name: 🔨 Install dependencies & Build
+        run: |
+          npm install
+          npm run build
+
+      - name: 📂 Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/ # Folder hasil build Vite
+          server-dir: ./     # Karena FTP tadi sudah diarahkan ke public_html
+          dangerous-clean-slate: false # Set true jika ingin hapus file lama yang gak ada di dist (hati-hati!)
