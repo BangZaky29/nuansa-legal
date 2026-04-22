@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Zap, Award, CheckCircle2, ArrowRight, Users, Briefcase, Scale } from 'lucide-react';
+import { Shield, Zap, Award, CheckCircle2, ArrowRight, Users, Briefcase, Scale, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import FAQ from '../components/FAQ';
 import OurTeam from '../components/OurTeam';
@@ -172,12 +172,23 @@ const Home: React.FC = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-secondary mb-4">{service.title}</h3>
                   <p className="text-gray-600 leading-relaxed mb-8">{service.desc}</p>
-                  <Link 
-                    to="/layanan"
-                    className="text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition-colors cursor-pointer"
-                  >
-                    Selengkapnya <ArrowRight size={18} />
-                  </Link>
+                  <div className="flex items-center justify-between">
+                    <Link 
+                      to="/layanan"
+                      className="text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition-colors cursor-pointer"
+                    >
+                      Selengkapnya <ArrowRight size={18} />
+                    </Link>
+                    <a 
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all shadow-sm"
+                      title="Chat WhatsApp"
+                    >
+                      <MessageSquare size={18} />
+                    </a>
+                  </div>
                 </motion.div>
               );
             })}
