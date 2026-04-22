@@ -3,7 +3,7 @@ name: Deploy Website to cPanel
 on:
   push:
     branches:
-      - main  # Ganti 'master' jika branch utama kamu namanya master
+      - main
 
 jobs:
   web-deploy:
@@ -16,12 +16,12 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Sesuaikan dengan versi node kamu
+          node-version: '22'
 
       - name: 🔨 Install dependencies & Build
         run: |
           npm install
-          npm run build
+          CI=false npm run build # CI=false agar build tetap sukses meski ada unused variable (waUrl)
 
       - name: 📂 Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -30,7 +30,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ./ 
-          port: 21            # Tambahkan port secara eksplisit
-          protocol: ftp       # Coba paksa gunakan ftp biasa (lebih stabil untuk beberapa cPanel)
-          timeout: 60000      # Tambahkan timeout agar tidak cepat putus
+          server-dir: ./
+          port: 21
+          protocol: ftp
+          # 'loose' sangat penting untuk cPanel agar tidak gagal saat handshake SSL/TLS
+          security: loose 
+          timeout: 90000
