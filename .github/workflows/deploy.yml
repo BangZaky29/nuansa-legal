@@ -16,7 +16,7 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Pakai 22 biar gak kena warning lagi
+          node-version: '22' # Pakai 22 biar gak kena warning lagi - 
 
       - name: 🔨 Install dependencies & Build
         run: |
