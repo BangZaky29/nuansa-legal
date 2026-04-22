@@ -16,12 +16,12 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '22' # Pakai 22 biar gak kena warning lagi
 
       - name: 🔨 Install dependencies & Build
         run: |
           npm install
-          CI=false npm run build # CI=false agar build tetap sukses meski ada unused variable (waUrl)
+          CI=false npm run build
 
       - name: 📂 Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -33,6 +33,5 @@ jobs:
           server-dir: ./
           port: 21
           protocol: ftp
-          # 'loose' sangat penting untuk cPanel agar tidak gagal saat handshake SSL/TLS
-          security: loose 
+          security: loose
           timeout: 90000
