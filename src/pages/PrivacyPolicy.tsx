@@ -7,8 +7,8 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <div className="pt-24 md:pt-32 pb-20 bg-gray-50 min-h-screen">
       <SEO 
-        title="Kebijakan Privasi - Nuansa Legal"
-        description="Kebijakan Privasi Nuansa Legal menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda."
+        title="Kebijakan Privasi - PT. Nuansa Berkah Sejahtera"
+        description="Kebijakan Privasi PT. Nuansa Berkah Sejahtera menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda."
       />
 
       <div className="container mx-auto px-4 md:px-6">
@@ -32,7 +32,7 @@ const PrivacyPolicy: React.FC = () => {
                   <Eye className="text-primary" size={24} /> 1. Pendahuluan
                 </h2>
                 <p>
-                  Nuansa Legal ("kami", "milik kami") berkomitmen untuk melindungi dan menghormati privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi Anda saat Anda mengunjungi situs web kami dan menggunakan layanan kami.
+                  PT. Nuansa Berkah Sejahtera ("kami", "milik kami") berkomitmen untuk melindungi dan menghormati privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi Anda saat Anda mengunjungi situs web kami dan menggunakan layanan kami.
                 </p>
               </section>
 

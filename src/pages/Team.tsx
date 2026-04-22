@@ -8,8 +8,8 @@ const Team: React.FC = () => {
   return (
     <div className="pt-24 md:pt-32 pb-0 bg-white overflow-x-hidden">
       <SEO
-        title="Tim Kami - Nuansa Legal"
-        description="Kenali tim profesional di balik Nuansa Legal. Konsultan hukum, marketing, dan kreatif yang siap membantu bisnis Anda tumbuh."
+        title="Tim Kami - PT. Nuansa Berkah Sejahtera"
+        description="Kenali tim profesional di balik PT. Nuansa Berkah Sejahtera. Konsultan hukum, marketing, dan kreatif yang siap membantu bisnis Anda tumbuh."
       />
 
       {/* Hero Header with Parallax Effect */}

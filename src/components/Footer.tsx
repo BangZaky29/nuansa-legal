@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
           {/* Brand Column */}
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-2">
-              <img src={logo} alt="Nuansa Legal" className="h-12 w-auto rounded-lg" />
-              <span className="font-sen font-bold text-2xl text-white">Nuansa Legal</span>
+              <img src={logo} alt="PT. Nuansa Berkah Sejahtera" className="h-12 w-auto rounded-lg" />
+              <span className="font-sen font-bold text-2xl text-white">PT. Nuansa Berkah Sejahtera</span>
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Solusi hukum terpercaya untuk kebutuhan bisnis dan perizinan Anda di Indonesia. Profesional, cepat, dan transparan.
@@ -72,14 +72,17 @@ const Footer: React.FC = () => {
             <ul className="space-y-4">
               <li className="flex gap-3 text-gray-400">
                 <MapPin className="text-primary shrink-0" size={20} />
-                <a 
-                  href="https://www.google.com/maps?q=-6.5793111,106.6675551&z=17&hl=id" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
-                >
-                  Bogor, Indonesia
-                </a>
+                <div>
+                  <p className="text-white font-bold text-sm mb-1">Jakarta</p>
+                  <p className="text-xs leading-relaxed">Gedung STC Senayan Lt.3 No.190, Jakarta Pusat</p>
+                </div>
+              </li>
+              <li className="flex gap-3 text-gray-400">
+                <MapPin className="text-primary shrink-0" size={20} />
+                <div>
+                  <p className="text-white font-bold text-sm mb-1">Bogor</p>
+                  <p className="text-xs leading-relaxed">Cibungbulang Town Hill Cluster Halimun H7, Kab. Bogor</p>
+                </div>
               </li>
               <li className="flex gap-3 text-gray-400">
                 <Phone className="text-primary shrink-0" size={20} />
@@ -118,7 +121,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
-          <p>© {currentYear} Nuansa Legal. All rights reserved.</p>
+          <p>© {currentYear} PT. Nuansa Berkah Sejahtera. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>

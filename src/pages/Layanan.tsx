@@ -27,8 +27,8 @@ const Layanan: React.FC = () => {
 
   const handleConsultation = (serviceName: string, desc: string) => {
     const messages = [
-      `Halo Nuansa Legal, saya sedang merencanakan *${serviceName}* (${desc}). Kira-kira apa saja persyaratan yang perlu saya siapkan agar prosesnya cepat dan lancar ya? Mohon infonya, terima kasih.`,
-      `Selamat siang Admin Nuansa Legal, saya tertarik dengan layanan *${serviceName}*. Bisa bantu jelaskan estimasi waktu pengerjaan dan benefit yang saya dapatkan? Terima kasih.`,
+      `Halo PT. Nuansa Berkah Sejahtera, saya sedang merencanakan *${serviceName}* (${desc}). Kira-kira apa saja persyaratan yang perlu saya siapkan agar prosesnya cepat dan lancar ya? Mohon infonya, terima kasih.`,
+      `Selamat siang Admin PT. Nuansa Berkah Sejahtera, saya tertarik dengan layanan *${serviceName}*. Bisa bantu jelaskan estimasi waktu pengerjaan dan benefit yang saya dapatkan? Terima kasih.`,
       `Halo, saya ingin tanya-tanya seputar *${serviceName}*. Apakah saat ini ada promo atau paket khusus untuk pendirian baru? Mohon bantuannya, terima kasih.`
     ];
     
@@ -41,7 +41,7 @@ const Layanan: React.FC = () => {
   return (
     <div className="pt-24 md:pt-32 pb-20 bg-gray-50 overflow-x-hidden">
       <SEO 
-        title="Layanan Legalitas & Perizinan Usaha - Nuansa Legal"
+        title="Layanan Legalitas & Perizinan Usaha - PT. Nuansa Berkah Sejahtera"
         description="Jasa pendirian PT, CV, Yayasan, PMA, hingga pengurusan NIB dan Pendaftaran Merek. Solusi legalitas terlengkap untuk bisnis Anda di Indonesia."
       />
       

@@ -16,7 +16,7 @@ const SEO: React.FC<SEOProps> = ({
   ogType = 'website',
   ogImage = '/og-image.jpg' 
 }) => {
-  const fullTitle = `${title} | Nuansa Legal`;
+  const fullTitle = `${title} | PT. Nuansa Berkah Sejahtera`;
   
   return (
     <Helmet>

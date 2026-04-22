@@ -7,8 +7,8 @@ const TermsOfService: React.FC = () => {
   return (
     <div className="pt-24 md:pt-32 pb-20 bg-gray-50 min-h-screen">
       <SEO 
-        title="Syarat dan Ketentuan - Nuansa Legal"
-        description="Syarat dan Ketentuan penggunaan layanan Nuansa Legal."
+        title="Syarat dan Ketentuan - PT. Nuansa Berkah Sejahtera"
+        description="Syarat dan Ketentuan penggunaan layanan PT. Nuansa Berkah Sejahtera."
       />
 
       <div className="container mx-auto px-4 md:px-6">
@@ -32,7 +32,7 @@ const TermsOfService: React.FC = () => {
                   <CheckCircle className="text-primary" size={24} /> 1. Penerimaan Ketentuan
                 </h2>
                 <p>
-                  Dengan mengakses dan menggunakan situs web Nuansa Legal, Anda setuju untuk terikat oleh Syarat dan Ketentuan ini. Jika Anda tidak menyetujui bagian apa pun dari ketentuan ini, Anda tidak diperbolehkan menggunakan layanan kami.
+                  Dengan mengakses dan menggunakan situs web PT. Nuansa Berkah Sejahtera, Anda setuju untuk terikat oleh Syarat dan Ketentuan ini. Jika Anda tidak menyetujui bagian apa pun dari ketentuan ini, Anda tidak diperbolehkan menggunakan layanan kami.
                 </p>
               </section>
 
@@ -41,7 +41,7 @@ const TermsOfService: React.FC = () => {
                   <Scale className="text-primary" size={24} /> 2. Ruang Lingkup Layanan
                 </h2>
                 <p>
-                  Nuansa Legal menyediakan jasa konsultasi dan pengurusan administrasi hukum terkait pendirian badan usaha (PT, CV, dll), perizinan usaha, dan pendaftaran merek di Indonesia. Kami bukan firma hukum dan informasi di situs ini bukan merupakan nasihat hukum formal.
+                  PT. Nuansa Berkah Sejahtera menyediakan jasa konsultasi dan pengurusan administrasi hukum terkait pendirian badan usaha (PT, CV, dll), perizinan usaha, dan pendaftaran merek di Indonesia. Kami bukan firma hukum dan informasi di situs ini bukan merupakan nasihat hukum formal.
                 </p>
               </section>
 
@@ -73,7 +73,7 @@ const TermsOfService: React.FC = () => {
                   <AlertCircle className="text-primary" size={24} /> 5. Batasan Tanggung Jawab
                 </h2>
                 <p>
-                  Nuansa Legal tidak bertanggung jawab atas kerugian tidak langsung atau konsekuensial yang timbul dari penggunaan layanan kami atau keterlambatan proses perizinan yang disebabkan oleh pihak ketiga (instansi pemerintah, dll).
+                  PT. Nuansa Berkah Sejahtera tidak bertanggung jawab atas kerugian tidak langsung atau konsekuensial yang timbul dari penggunaan layanan kami atau keterlambatan proses perizinan yang disebabkan oleh pihak ketiga (instansi pemerintah, dll).
                 </p>
               </section>
 

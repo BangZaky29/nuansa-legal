@@ -7,8 +7,8 @@ const KontakKami: React.FC = () => {
   return (
     <div className="pt-24 md:pt-32 pb-20 bg-gray-50 overflow-x-hidden min-h-screen">
       <SEO 
-        title="Hubungi Kami - Konsultasi Legalitas Gratis | Nuansa Legal"
-        description="Punya pertanyaan seputar pendirian PT, CV, atau izin usaha? Hubungi tim ahli Nuansa Legal sekarang untuk konsultasi gratis dan respon cepat."
+        title="Hubungi Kami - Konsultasi Legalitas Gratis"
+        description="Punya pertanyaan seputar pendirian PT, CV, atau izin usaha? Hubungi tim ahli PT. Nuansa Berkah Sejahtera sekarang untuk konsultasi gratis dan respon cepat."
       />
 
       <div className="container mx-auto px-4 md:px-6">
@@ -75,14 +75,28 @@ const KontakKami: React.FC = () => {
                 <motion.div 
                   whileHover={{ x: 10 }}
                   className="flex gap-6 items-start group cursor-pointer"
+                  onClick={() => window.open('https://www.google.com/maps?q=Gedung+STC+Senayan+Jakarta', '_blank')}
+                >
+                  <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-secondary transition-all duration-500 transform group-hover:rotate-12">
+                    <MapPin size={28} />
+                  </div>
+                  <div>
+                    <h4 className="text-gray-400 font-bold text-xs uppercase tracking-[0.2em] mb-2">Kantor Jakarta</h4>
+                    <p className="text-lg font-bold group-hover:text-primary transition-colors leading-tight">Gedung STC Senayan Lt.3 No.190, Jakarta Pusat</p>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  whileHover={{ x: 10 }}
+                  className="flex gap-6 items-start group cursor-pointer"
                   onClick={() => window.open('https://www.google.com/maps?q=-6.5793111,106.6675551&z=17&hl=id', '_blank')}
                 >
                   <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-secondary transition-all duration-500 transform group-hover:rotate-12">
                     <MapPin size={28} />
                   </div>
                   <div>
-                    <h4 className="text-gray-400 font-bold text-xs uppercase tracking-[0.2em] mb-2">Kantor Pusat</h4>
-                    <p className="text-xl font-bold group-hover:text-primary transition-colors leading-snug">Bogor, Indonesia</p>
+                    <h4 className="text-gray-400 font-bold text-xs uppercase tracking-[0.2em] mb-2">Kantor Bogor</h4>
+                    <p className="text-lg font-bold group-hover:text-primary transition-colors leading-tight">Cibungbulang Town Hill Cluster Halimun H7, Kab. Bogor</p>
                   </div>
                 </motion.div>
               </div>

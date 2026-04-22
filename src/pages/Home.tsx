@@ -43,7 +43,7 @@ const Home: React.FC = () => {
     <div className="flex flex-col">
       <SEO 
         title="Beranda" 
-        description="Nuansa Legal adalah solusi terpercaya untuk pendirian PT, CV, Yayasan, dan perizinan usaha di Indonesia. Cepat, tepat, dan transparan."
+        description="PT. Nuansa Berkah Sejahtera adalah solusi terpercaya untuk pendirian PT, CV, Yayasan, dan perizinan usaha di Indonesia. Cepat, tepat, dan transparan."
       />
 
       {/* Hero Section */}
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img 
             src={heroBg} 
-            alt="Nuansa Legal Office" 
+            alt="PT. Nuansa Berkah Sejahtera Office" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-transparent"></div>
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
                 Dengan Pondasi <span className="text-primary italic">Legal</span> Yang Kuat
               </h1>
               <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl font-light">
-                Nuansa Legal hadir sebagai mitra strategis dalam mengurus segala kebutuhan perizinan dan hukum perusahaan Anda. Cepat, tepat, dan tanpa ribet.
+                PT. Nuansa Berkah Sejahtera hadir sebagai mitra strategis dalam mengurus segala kebutuhan perizinan dan hukum perusahaan Anda. Cepat, tepat, dan tanpa ribet.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/layanan" className="bg-primary hover:bg-primary-dark text-secondary font-black py-4 px-10 rounded-xl shadow-2xl transition-all transform hover:-translate-y-1 flex items-center gap-2">
@@ -148,7 +148,7 @@ const Home: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, idx) => {
-              const waMessage = encodeURIComponent(`Halo Nuansa Legal, saya tertarik dengan layanan ${service.title}. ${service.desc} Bisa bantu jelaskan lebih lanjut prosedurnya?`);
+              const waMessage = encodeURIComponent(`Halo PT. Nuansa Berkah Sejahtera, saya tertarik dengan layanan ${service.title}. ${service.desc} Bisa bantu jelaskan lebih lanjut prosedurnya?`);
               const waUrl = `https://wa.me/6289644448721?text=${waMessage}`;
               
               return (
@@ -194,7 +194,7 @@ const Home: React.FC = () => {
               <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl">
                 <img 
                   src={aboutImg} 
-                  alt="Tentang Nuansa Legal" 
+                  alt="Tentang PT. Nuansa Berkah Sejahtera" 
                   className="w-full h-auto" 
                   loading="lazy"
                 />
@@ -217,7 +217,7 @@ const Home: React.FC = () => {
               <div>
                 <h2 className="text-3xl md:text-5xl font-sen font-bold text-secondary mb-6">Mitra Terpercaya Pendirian Usaha Anda</h2>
                 <p className="text-gray-600 text-lg leading-relaxed">
-                  Nuansa Legal didirikan dengan visi untuk menyederhanakan proses legalitas di Indonesia. Kami percaya bahwa setiap pengusaha berhak mendapatkan kemudahan dalam memulai dan menjalankan bisnis mereka.
+                  PT. Nuansa Berkah Sejahtera didirikan dengan visi untuk menyederhanakan proses legalitas di Indonesia. Kami percaya bahwa setiap pengusaha berhak mendapatkan kemudahan dalam memulai dan menjalankan bisnis mereka.
                 </p>
               </div>
 

@@ -96,7 +96,7 @@ const OurTeam: React.FC = () => {
         style={{ x: bgTextX }}
         className="absolute top-1/2 left-0 -translate-y-1/2 text-[18rem] font-sen font-black text-gray-50/50 whitespace-nowrap pointer-events-none select-none z-0"
       >
-        EXPERT TEAM NUANSA LEGAL
+        EXPERT TEAM PT. NUANSA BERKAH SEJAHTERA
       </motion.div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">

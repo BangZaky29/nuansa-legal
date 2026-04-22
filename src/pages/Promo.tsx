@@ -127,8 +127,8 @@ const Promo: React.FC = () => {
   return (
     <div className="pt-24 md:pt-32 pb-20 bg-gray-50 min-h-screen overflow-x-hidden">
       <SEO
-        title={`Promo ${currentMonthName} ${currentYear} - Penawaran Spesial Nuansa Legal`}
-        description={`Cek promo terbaru bulan ${currentMonthName} ${currentYear} di Nuansa Legal. Dapatkan harga spesial untuk pendirian PT, CV, dan izin usaha lainnya.`}
+        title={`Promo ${currentMonthName} ${currentYear} - Penawaran Spesial PT. Nuansa Berkah Sejahtera`}
+        description={`Cek promo terbaru bulan ${currentMonthName} ${currentYear} di PT. Nuansa Berkah Sejahtera. Dapatkan harga spesial untuk pendirian PT, CV, dan izin usaha lainnya.`}
       />
 
       <div className="container mx-auto px-4 md:px-6">
@@ -294,7 +294,7 @@ const Promo: React.FC = () => {
                         <button
                           onClick={() => {
                             if (navigator.share) {
-                              navigator.share({ title: 'Promo Nuansa Legal', url: window.location.href });
+                              navigator.share({ title: 'Promo PT. Nuansa Berkah Sejahtera', url: window.location.href });
                             }
                           }}
                           className="p-4 bg-gray-100 rounded-2xl text-secondary hover:bg-primary transition-all shadow-sm active:scale-90"

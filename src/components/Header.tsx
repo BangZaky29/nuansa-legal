@@ -38,10 +38,10 @@ const Header: React.FC = () => {
               whileHover={{ rotate: 5, scale: 1.05 }}
               className="relative"
             >
-              <img src={logo} alt="Nuansa Legal" className="h-10 md:h-12 w-auto rounded-xl shadow-lg border border-white/20" />
+              <img src={logo} alt="PT. Nuansa Berkah Sejahtera" className="h-10 md:h-12 w-auto rounded-xl shadow-lg border border-white/20" />
             </motion.div>
             <span className={`font-sen font-black text-xl md:text-2xl transition-colors duration-300 ${textColorClass}`}>
-              Nuansa <span className="text-primary">Legal</span>
+              PT. Nuansa <span className="text-primary">Berkah</span> Sejahtera
             </span>
           </Link>
 
