@@ -5,14 +5,26 @@ import ScrollToTop from './components/ScrollToTop';
 
 import LoadingScreen from './components/LoadingScreen';
 
+// Helper to handle lazy loading errors (useful after new deployments)
+const lazyRetry = (componentImport: () => Promise<{ default: React.ComponentType<any> }>) => {
+  return React.lazy(() =>
+    componentImport().catch((error) => {
+      console.error('Error loading chunk:', error);
+      // Force reload to get the latest build from server
+      window.location.reload();
+      return { default: () => null };
+    })
+  );
+};
+
 // Lazy loading pages for better performance
-const Home = React.lazy(() => import('./pages/Home'));
-const Layanan = React.lazy(() => import('./pages/Layanan'));
-const Promo = React.lazy(() => import('./pages/Promo'));
-const KontakKami = React.lazy(() => import('./pages/KontakKami'));
-const Team = React.lazy(() => import('./pages/Team'));
-const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
-const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
+const Home = lazyRetry(() => import('./pages/Home'));
+const Layanan = lazyRetry(() => import('./pages/Layanan'));
+const Promo = lazyRetry(() => import('./pages/Promo'));
+const KontakKami = lazyRetry(() => import('./pages/KontakKami'));
+const Team = lazyRetry(() => import('./pages/Team'));
+const PrivacyPolicy = lazyRetry(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazyRetry(() => import('./pages/TermsOfService'));
 
 import { DataProvider } from './context/DataContext';
 
