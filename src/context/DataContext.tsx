@@ -42,19 +42,19 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const fetchImages = useCallback(async (category: string = 'all', period?: string) => {
     setLoading(prev => ({ ...prev, [category]: true }));
     try {
-      let url = category === 'all' 
+      let url = category === 'all'
         ? `${API_BASE_URL}/api/images`
         : `${API_BASE_URL}/api/images/${category}`;
-      
+
       if (period) {
         const separator = url.includes('?') ? '&' : '?';
         url += `${separator}period=${period}`;
       }
-      
+
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
-      
+
       setImages(prev => ({ ...prev, [category]: data }));
       setError(null);
     } catch (err: any) {
@@ -87,6 +87,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchImages('other');
     fetchImages('hero');
     fetchImages('about');
+    fetchImages('promo');
+    fetchImages('team');
   }, [fetchFaqs, fetchImages]);
 
   return (
