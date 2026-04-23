@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Camera, MessageCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { useImages } from '../hooks/useImages';
 
@@ -11,6 +11,18 @@ interface TeamMember {
   instagram?: string;
   whatsapp?: string;
 }
+
+const SocialIcon = ({ name, className = "" }: { name: string, className?: string }) => (
+  <div 
+    className={`w-5 h-5 bg-current ${className}`}
+    style={{
+      mask: `url(https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${name}.svg) no-repeat center`,
+      WebkitMask: `url(https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${name}.svg) no-repeat center`,
+      maskSize: 'contain',
+      WebkitMaskSize: 'contain'
+    }}
+  />
+);
 
 const teamSocials: Record<string, { ig: string; wa: string }> = {
   'Vikri Firdaus': {
@@ -171,9 +183,9 @@ const OurTeam: React.FC = () => {
                         href={member.instagram} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-secondary hover:bg-[#E4405F] hover:text-white transition-all shadow-lg border border-primary/20"
+                        className="w-12 h-12 bg-[#E1306C] rounded-2xl flex items-center justify-center text-white transition-all shadow-lg shadow-[#E1306C]/30"
                       >
-                        <Camera size={22} />
+                        <SocialIcon name="instagram" />
                       </a>
                     )}
                     {member.whatsapp && (
@@ -181,9 +193,9 @@ const OurTeam: React.FC = () => {
                         href={member.whatsapp} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-secondary hover:bg-[#25D366] hover:text-white transition-all shadow-lg border border-primary/20"
+                        className="w-12 h-12 bg-[#25D366] rounded-2xl flex items-center justify-center text-white transition-all shadow-lg shadow-[#25D366]/30"
                       >
-                        <MessageCircle size={22} />
+                        <SocialIcon name="whatsapp" />
                       </a>
                     )}
                   </div>
