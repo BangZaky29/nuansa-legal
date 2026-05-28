@@ -84,13 +84,31 @@ const Footer: React.FC = () => {
               <li>
                 <Link to="/layanan" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                  Layanan
+                  Layanan Legalitas Bisnis
+                </Link>
+              </li>
+              <li>
+                <Link to="/virtual-office" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Layanan Virtual Office
+                </Link>
+              </li>
+              <li>
+                <Link to="/layanan-ppat" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Layanan PPAT & Inspeksi
                 </Link>
               </li>
               <li>
                 <Link to="/promo" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
                   Promo
+                </Link>
+              </li>
+              <li>
+                <Link to="/artikel" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Artikel
                 </Link>
               </li>
               <li>

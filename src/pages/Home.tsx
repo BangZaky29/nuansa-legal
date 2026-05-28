@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Zap, Award, CheckCircle2, ArrowRight, Users, Briefcase, Scale, MessageSquare } from 'lucide-react';
+import { Shield, Zap, Award, CheckCircle2, ArrowRight, Users, Briefcase, Scale, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import FAQ from '../components/FAQ';
 import OurTeam from '../components/OurTeam';
 import SEO from '../components/SEO';
 
 import { useImages } from '../hooks/useImages';
+import { useArticles, getFallbackImage } from '../hooks/useArticles';
 
 const Home: React.FC = () => {
   const { images: heroImages } = useImages('hero');
   const { images: aboutImages } = useImages('about');
+  const { articles, loading: loadingArticles } = useArticles();
+
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const scrollSlider = (direction: 'left' | 'right') => {
+    if (sliderRef.current) {
+      const scrollAmount = direction === 'left' ? -344 : 344;
+      sliderRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const heroBg = heroImages.length > 0 ? heroImages[0].url : '';
   const aboutImg = aboutImages.length > 0 ? aboutImages[0].url : '';
@@ -133,6 +144,112 @@ const Home: React.FC = () => {
           </div>
         </div>
       </motion.section>
+
+      {/* Latest Articles Section */}
+      <section className="py-24 bg-white overflow-hidden border-t border-gray-100">
+        <style>{`
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}</style>
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
+          >
+            <div className="max-w-2xl">
+              <span className="inline-block py-1.5 px-4 rounded-full bg-primary/10 text-primary font-bold text-sm mb-4 border border-primary/20">
+                Wawasan Hukum
+              </span>
+              <h2 className="text-3xl md:text-5xl font-sen font-bold text-secondary mb-4">Wawasan & Edukasi Hukum</h2>
+              <p className="text-gray-600 text-lg">Dapatkan informasi terkini seputar hukum bisnis, perizinan, dan regulasi di Indonesia.</p>
+            </div>
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 shrink-0 mt-4 md:mt-0">
+              <div className="hidden md:flex items-center gap-2">
+                <button 
+                  onClick={() => scrollSlider('left')}
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-secondary hover:border-primary transition-all shadow-sm"
+                  aria-label="Geser ke kiri"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button 
+                  onClick={() => scrollSlider('right')}
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-secondary hover:border-primary transition-all shadow-sm"
+                  aria-label="Geser ke kanan"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+              <Link to="/artikel" className="text-secondary font-bold flex items-center gap-2 hover:gap-3 transition-all group ml-0 md:ml-4">
+                Lihat Semua Artikel <ArrowRight size={20} className="text-primary" />
+              </Link>
+            </div>
+          </motion.div>
+
+          <div ref={sliderRef} className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory hide-scrollbar">
+            {loadingArticles ? (
+              [...Array(4)].map((_, i) => (
+                <div key={i} className="w-[85vw] sm:w-[300px] md:w-[320px] snap-center bg-gray-100 rounded-3xl h-96 animate-pulse shrink-0"></div>
+              ))
+            ) : articles.length > 0 ? (
+              articles.slice(0, 5).map((article, idx) => {
+                const fallback = getFallbackImage(article.title, idx);
+                return (
+                  <motion.a
+                    key={idx}
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="w-[85vw] sm:w-[300px] md:w-[320px] snap-center group bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl hover:border-primary/30 transition-all duration-500 flex flex-col shrink-0"
+                  >
+                    <div className="relative h-48 overflow-hidden shrink-0">
+                      <img 
+                        src={article.image || fallback} 
+                        alt={article.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = fallback;
+                        }}
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-white/90 backdrop-blur-md text-secondary text-xs font-bold py-1 px-3 rounded-full shadow-lg">
+                          {article.source.name}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-1">
+                      <h3 className="font-sen font-bold text-secondary text-lg mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+                      <p className="text-gray-500 text-sm line-clamp-2 mb-4 flex-1">
+                        {article.description}
+                      </p>
+                      <span className="text-secondary font-bold text-sm flex items-center gap-2 group-hover:text-primary group-hover:gap-3 transition-all mt-auto">
+                        Baca Selengkapnya <ArrowRight size={16} />
+                      </span>
+                    </div>
+                  </motion.a>
+                );
+              })
+            ) : (
+              <div className="w-full text-center py-10 bg-gray-50 rounded-3xl border border-dashed border-gray-200">
+                <p className="text-gray-500">Artikel belum tersedia saat ini.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
 
       {/* Services Section */}
       <section className="py-24 bg-gray-50 overflow-hidden">

@@ -20,9 +20,12 @@ const lazyRetry = (componentImport: () => Promise<{ default: React.ComponentType
 // Lazy loading pages for better performance
 const Home = lazyRetry(() => import('./pages/Home'));
 const Layanan = lazyRetry(() => import('./pages/Layanan'));
+const LayananPPAT = lazyRetry(() => import('./pages/LayananPPAT'));
+const VirtualOffice = lazyRetry(() => import('./pages/VirtualOffice'));
 const Promo = lazyRetry(() => import('./pages/Promo'));
 const KontakKami = lazyRetry(() => import('./pages/KontakKami'));
 const Team = lazyRetry(() => import('./pages/Team'));
+const Artikel = lazyRetry(() => import('./pages/Artikel'));
 const PrivacyPolicy = lazyRetry(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazyRetry(() => import('./pages/TermsOfService'));
 
@@ -71,8 +74,11 @@ const AppContent: React.FC = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="layanan" element={<Layanan />} />
+            <Route path="layanan-ppat" element={<LayananPPAT />} />
+            <Route path="virtual-office" element={<VirtualOffice />} />
             <Route path="promo" element={<Promo />} />
             <Route path="team" element={<Team />} />
+            <Route path="artikel" element={<Artikel />} />
             <Route path="kontak-kami" element={<KontakKami />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="terms-of-service" element={<TermsOfService />} />
