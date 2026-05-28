@@ -7,7 +7,7 @@ const VirtualOffice: React.FC = () => {
   const packages = [
     {
       name: 'Virtual Office Basic',
-      price: 'Rp 50.000.000',
+      price: 'Rp 2.400.000',
       period: 'tahun',
       desc: 'Solusi ideal bagi startup dan pengusaha mandiri yang membutuhkan alamat bisnis prestisius dan penanganan surat menyurat profesional.',
       features: [
@@ -24,14 +24,14 @@ const VirtualOffice: React.FC = () => {
     },
     {
       name: 'Virtual Office Standard (PKP)',
-      price: 'Rp 75.500.000',
+      price: 'Rp 3.000.000',
       period: 'tahun',
       desc: 'Paket paling populer yang mendukung pengurusan izin Pengusaha Kena Pajak (PKP) dan fasilitas ruang rapat bulanan.',
       features: [
         'Semua Fitur Paket Basic',
         'Mendukung Penuh Pengurusan PKP (Pengusaha Kena Pajak)',
         'Bantuan Survei dari Instansi Pemerintah (Pajak/OSS)',
-        'Fasilitas Ruang Rapat (Meeting Room) 3 Jam/Bulan',
+        'Fasilitas Ruang Rapat (Meeting Room) 8 Jam/Bulan',
         'Papan Nama Perusahaan Resmi di Lobi Bersama',
         'Nomor Telepon Bersama & Call Forwarding'
       ],
@@ -41,12 +41,12 @@ const VirtualOffice: React.FC = () => {
     },
     {
       name: 'Virtual Office Premium',
-      price: 'Rp 87.500.000',
+      price: 'Rp 8.000.000',
       period: 'tahun',
       desc: 'Layanan terlengkap dengan kuota ruang rapat lebih besar, nomor telepon eksklusif, serta prioritas pendampingan kepatuhan hukum.',
       features: [
         'Semua Fitur Paket Standard',
-        'Fasilitas Ruang Rapat (Meeting Room) 8 Jam/Bulan',
+        'Fasilitas Ruang Rapat (Meeting Room) 10 Jam/Bulan',
         'Nomor Telepon Khusus/Dedicated untuk Perusahaan Anda',
         'Penerusan Panggilan Langsung ke Nomor Pribadi',
         'Prioritas Pendampingan Kunjungan Pajak & Perbankan',
@@ -142,8 +142,8 @@ Mohon informasi mengenai prosedur pengisian formulir, syarat dokumen pendukung, 
                 whileTap={{ scale: 0.97 }}
                 onClick={() => handleBooking(pkg.name, pkg.price)}
                 className={`w-full py-4 px-6 rounded-2xl font-black text-sm transition-all shadow-lg ${pkg.popular
-                    ? 'bg-primary hover:bg-primary-dark text-secondary shadow-primary/20'
-                    : 'bg-secondary hover:bg-navy text-white shadow-secondary/20'
+                  ? 'bg-primary hover:bg-primary-dark text-secondary shadow-primary/20'
+                  : 'bg-secondary hover:bg-navy text-white shadow-secondary/20'
                   }`}
               >
                 Pesan Sekarang
