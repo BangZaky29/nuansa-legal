@@ -16,13 +16,12 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Pakai 22 biar gak kena warning lagi
+          node-version: '22'
 
       - name: 🔨 Install dependencies & Build
         run: |
           npm install
           CI=false npm run build
-        # PENTING: Environment variable ini dikembalikan agar koneksi API tidak putus
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_OFFICE_WHATSAPP: ${{ secrets.VITE_OFFICE_WHATSAPP }}
@@ -31,18 +30,13 @@ jobs:
           VITE_PHONE_YUANITA: ${{ secrets.VITE_PHONE_YUANITA }}
           VITE_PHONE_DARUS: ${{ secrets.VITE_PHONE_DARUS }}
 
-      - name: 📂 Sync files via LFTP (Bypass cPanel Firewall)
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-          lftp -c "
-          set ftp:passive-mode true;
-          set ssl:verify-certificate no;
-          open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
-          mirror -R ./dist/ ./ --ignore-time --parallel=10;
-          quit;
-          "
+      # Action ini jauh lebih ringan dan cepat dari lftp
+      - name: 📂 Sync files via Fast FTP Action
+        uses: sebastianpopp/ftp-action@releases/v2
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: ./dist/
+          remoteDir: ./
+          options: "--verbose"
