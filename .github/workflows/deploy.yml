@@ -16,27 +16,22 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '22' # Pakai 22 biar gak kena warning lagi - 
 
       - name: 🔨 Install dependencies & Build
         run: |
           npm install
           CI=false npm run build
-        env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
-          VITE_OFFICE_WHATSAPP: ${{ secrets.VITE_OFFICE_WHATSAPP }}
-          VITE_PHONE_SANDI: ${{ secrets.VITE_PHONE_SANDI }}
-          VITE_PHONE_FRADIYA: ${{ secrets.VITE_PHONE_FRADIYA }}
-          VITE_PHONE_YUANITA: ${{ secrets.VITE_PHONE_YUANITA }}
-          VITE_PHONE_DARUS: ${{ secrets.VITE_PHONE_DARUS }}
 
-      # Action ini jauh lebih ringan dan cepat dari lftp
-      - name: 📂 Sync files via Fast FTP Action
-        uses: sebastianpopp/ftp-action@releases/v2
+      - name: 📂 Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: ./dist/
-          remoteDir: ./
-          options: "--verbose"
+          local-dir: ./dist/
+          server-dir: ./
+          port: 21
+          protocol: ftp
+          security: loose
+          timeout: 90000
