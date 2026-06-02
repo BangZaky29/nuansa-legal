@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://apilegal.nuansasolution.id';
+export const API_BASE_URL = 'https://apilegal.nuansalegal.id';
 export const IMAGE_BASE_URL = `${API_BASE_URL}/uploads`;
 
 // RSS Feeds Configuration (Bypass Google API)
