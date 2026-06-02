@@ -1,4 +1,4 @@
-name: Deploy Website to VPS
+name: Deploy Website to cPanel
 
 on:
   push:
@@ -7,15 +7,42 @@ on:
 
 jobs:
   web-deploy:
-    name: Trigger VPS Deploy Script
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: 🚀 Execute Deploy Script on VPS
-        uses: appleboy/ssh-action@v1.0.3
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            python3 /home/nuansasolution/apps/deploy.py main-web
+          node-version: '22' # Pakai 22 biar gak kena warning lagi
+
+      - name: 🔨 Install dependencies & Build
+        run: |
+          npm install
+          CI=false npm run build
+        # PENTING: Environment variable ini dikembalikan agar koneksi API tidak putus
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_OFFICE_WHATSAPP: ${{ secrets.VITE_OFFICE_WHATSAPP }}
+          VITE_PHONE_SANDI: ${{ secrets.VITE_PHONE_SANDI }}
+          VITE_PHONE_FRADIYA: ${{ secrets.VITE_PHONE_FRADIYA }}
+          VITE_PHONE_YUANITA: ${{ secrets.VITE_PHONE_YUANITA }}
+          VITE_PHONE_DARUS: ${{ secrets.VITE_PHONE_DARUS }}
+
+      - name: 📂 Sync files via LFTP (Bypass cPanel Firewall)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          lftp -c "
+          set ftp:passive-mode true;
+          set ssl:verify-certificate no;
+          open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
+          mirror -R ./dist/ ./ --ignore-time --parallel=10;
+          quit;
+          "

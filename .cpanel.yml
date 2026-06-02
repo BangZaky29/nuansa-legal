@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    # 1. Install dependencies
+    - npm install
+    # 2. Build project Vite menjadi folder 'dist'
+    - CI=false npm run build
+    # 3. Copy semua isi folder 'dist' ke dalam public_html
+    - /bin/cp -R dist/* /home/nuab1745/public_html/
