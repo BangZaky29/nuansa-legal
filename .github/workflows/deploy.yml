@@ -31,16 +31,18 @@ jobs:
           VITE_PHONE_YUANITA: ${{ secrets.VITE_PHONE_YUANITA }}
           VITE_PHONE_DARUS: ${{ secrets.VITE_PHONE_DARUS }}
 
-      - name: 📂 Sync files via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ./
-          port: 21
-          protocol: ftp
-          ftp-passive: true   # <--- INI SANGAT WAJIB ADA BIAR LOLOS FIREWALL RUMAHWEB
-          security: loose
-          timeout: 90000
+      - name: 📂 Sync files via LFTP (Bypass cPanel Firewall)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          lftp -c "
+          set ftp:passive-mode true;
+          set ssl:verify-certificate no;
+          open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
+          mirror -R ./dist/ ./ --ignore-time --parallel=10;
+          quit;
+          "
