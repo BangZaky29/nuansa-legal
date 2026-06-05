@@ -1,4 +1,4 @@
-name: Deploy Website to cPanel
+name: Deploy Website to cPanel (Rumah Web)
 
 on:
   push:
@@ -16,20 +16,30 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Pakai 22 biar gak kena warning lagi - 
+          node-version: '22'
 
       - name: 🔨 Install dependencies & Build
         run: |
           npm install
           CI=false npm run build
 
-      - name: 📂 Sync files via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 22
-          local_path: './dist/*'
-          remote_path: './'
-          sftp_only: true
+      - name: 📂 Deploy via SFTP (sshpass + lftp)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          # Install lftp
+          sudo apt-get install -y lftp
+
+          # Deploy semua file dari dist/ ke public_html/ di server
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" sftp://$FTP_SERVER <<EOF
+          set sftp:auto-confirm yes
+          set net:max-retries 3
+          set net:reconnect-interval-base 5
+          set ssl:verify-certificate no
+          mirror --reverse --delete --verbose \
+            --exclude=".git*" \
+            ./dist/ /home/$FTP_USERNAME/public_html/
+          bye
+          EOF
