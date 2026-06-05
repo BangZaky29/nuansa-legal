@@ -62,10 +62,10 @@ const Footer: React.FC = () => {
                   Admin Nuansa Legal
                 </span>
               </a>
-              <a href="https://nuansasolution.id" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-secondary transition-all group relative">
+              <a href="https://nuansalegal.id" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-secondary transition-all group relative">
                 <Globe size={20} />
                 <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold">
-                  Nuansa Solution
+                  Nuansa Legal
                 </span>
               </a>
             </div>
