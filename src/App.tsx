@@ -43,10 +43,10 @@ const AppContent: React.FC = () => {
   const [isInitialLoading, setIsInitialLoading] = React.useState(true);
 
   React.useEffect(() => {
-    // Reduced initial load time to 5s for better UX
+    // Initial load time - cukup 1.5s untuk branding
     const timer = setTimeout(() => {
       setIsInitialLoading(false);
-    }, 5000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
