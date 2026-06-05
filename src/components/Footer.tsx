@@ -4,7 +4,7 @@ import { Globe, Mail, Phone, MapPin } from 'lucide-react';
 import { useImages } from '../hooks/useImages';
 
 const SocialIcon = ({ name, size = 18, className = "" }: { name: string, size?: number, className?: string }) => (
-  <div 
+  <div
     className={`bg-current ${className}`}
     style={{
       width: size,
@@ -38,10 +38,10 @@ const Footer: React.FC = () => {
               Solusi hukum terpercaya untuk kebutuhan bisnis dan perizinan Anda di Indonesia. Profesional, cepat, dan transparan.
             </p>
             <div className="flex items-center gap-4">
-              <a 
-                href="https://www.instagram.com/nuansalegal.id/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.instagram.com/nuansalegal.id/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-all text-gray-400 group relative"
                 title="Instagram"
               >
@@ -50,10 +50,10 @@ const Footer: React.FC = () => {
                   @nuansalegal.id
                 </span>
               </a>
-              <a 
-                href="https://wa.me/6289644448721" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://wa.me/6289644448721"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all text-gray-400 group relative"
                 title="WhatsApp"
               >
