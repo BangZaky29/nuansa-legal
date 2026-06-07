@@ -84,16 +84,16 @@ const LoadingScreen: React.FC = () => {
               PT. NUANSA <span className="text-primary">BERKAH SEJAHTERA</span>
             </motion.h1>
           </div>
-          {/* <div className="overflow-hidden">
+          <div className="overflow-hidden mt-3">
             <motion.p
-              initial={{ y: 50, opacity: 0 }}
+              initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="text-primary font-bold text-sm md:text-lg tracking-[0.6em] uppercase"
+              transition={{ duration: 0.8, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              className="text-white/60 text-sm md:text-base font-medium tracking-[0.15em] uppercase"
             >
-              SEJAHTERA
+              Kantor Hukum Nuansa Legal dan Rekan
             </motion.p>
-          </div> */}
+          </div>
         </div>
 
         {/* Premium Progress Bar (Synced with 5s delay) */}

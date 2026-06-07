@@ -23,19 +23,23 @@ jobs:
         run: |
           npm install
           CI=false npm run build
+        # WAJIB ADA: Biar koneksi API & WA di frontend tidak putus
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_OFFICE_WHATSAPP: ${{ secrets.VITE_OFFICE_WHATSAPP }}
+          VITE_PHONE_SANDI: ${{ secrets.VITE_PHONE_SANDI }}
+          VITE_PHONE_FRADIYA: ${{ secrets.VITE_PHONE_FRADIYA }}
+          VITE_PHONE_YUANITA: ${{ secrets.VITE_PHONE_YUANITA }}
+          VITE_PHONE_DARUS: ${{ secrets.VITE_PHONE_DARUS }}
 
+      # Menggunakan action yang lebih stabil untuk cPanel Rumahweb
       - name: 📂 Deploy via FTP to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        uses: sebastianpopp/ftp-action@releases/v2
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          protocol: ftp
-          local-dir: ./dist/
-          server-dir: /public_html/
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
+          localDir: ./dist/
+          # Cukup gunakan ./ karena akun FTP sudah mengarah ke public_html
+          remoteDir: ./
+          options: "--verbose"
