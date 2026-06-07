@@ -39,7 +39,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
-            <motion.div 
+            <motion.div
               whileHover={{ rotate: 5, scale: 1.05 }}
               className="relative"
             >
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
               )}
             </motion.div>
             <span className={`font-sen font-black text-xl md:text-2xl transition-colors duration-300 ${textColorClass}`}>
-              PT. NUANSA <span className="text-primary">BERKAH SEJAHTERA</span>
+              NUANSA LEGAL
             </span>
           </Link>
 
@@ -65,9 +65,8 @@ const Header: React.FC = () => {
                     onMouseLeave={() => setIsLayananHovered(false)}
                   >
                     <button
-                      className={`font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:text-primary flex items-center gap-1.5 ${
-                        isActive ? 'text-primary' : textColorClass
-                      }`}
+                      className={`font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:text-primary flex items-center gap-1.5 ${isActive ? 'text-primary' : textColorClass
+                        }`}
                     >
                       <span>Layanan</span>
                       <ChevronDown size={14} className={`transition-transform duration-300 ${isLayananHovered ? 'rotate-180 text-primary' : ''}`} />
@@ -111,9 +110,8 @@ const Header: React.FC = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:text-primary relative group ${
-                    location.pathname === link.path ? 'text-primary' : textColorClass
-                  }`}
+                  className={`font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:text-primary relative group ${location.pathname === link.path ? 'text-primary' : textColorClass
+                    }`}
                 >
                   {link.name}
                   <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
@@ -134,8 +132,8 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Mobile Menu Toggle */}
-          <button 
-            className={`md:hidden p-2 rounded-xl transition-colors ${isScrolled ? 'bg-secondary/5 text-secondary' : 'bg-white/10 text-white'}`} 
+          <button
+            className={`md:hidden p-2 rounded-xl transition-colors ${isScrolled ? 'bg-secondary/5 text-secondary' : 'bg-white/10 text-white'}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -146,7 +144,7 @@ const Header: React.FC = () => {
       {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -159,9 +157,8 @@ const Header: React.FC = () => {
                   return (
                     <div key={link.name} className="flex flex-col gap-2">
                       <button
-                        className={`font-black text-xl flex items-center justify-between group w-full text-left ${
-                          isActive ? 'text-primary' : 'text-secondary'
-                        }`}
+                        className={`font-black text-xl flex items-center justify-between group w-full text-left ${isActive ? 'text-primary' : 'text-secondary'
+                          }`}
                         onClick={() => setIsMobileLayananOpen(!isMobileLayananOpen)}
                       >
                         <span>Layanan</span>
@@ -225,7 +222,7 @@ const Header: React.FC = () => {
                     }}
                   >
                     {link.name}
-                    <motion.div 
+                    <motion.div
                       initial={{ x: -10, opacity: 0 }}
                       whileHover={{ x: 0, opacity: 1 }}
                     >

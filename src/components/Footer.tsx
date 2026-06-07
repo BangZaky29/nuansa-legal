@@ -34,6 +34,9 @@ const Footer: React.FC = () => {
               )}
               <span className="font-sen font-bold text-2xl text-white">PT. NUANSA BERKAH SEJAHTERA</span>
             </Link>
+            <p className="text-white/60 text-xs font-bold tracking-[0.15em] uppercase -mt-2">
+              Kantor Hukum Nuansa Legal dan Rekan
+            </p>
             <p className="text-gray-400 leading-relaxed">
               Solusi hukum terpercaya untuk kebutuhan bisnis dan perizinan Anda di Indonesia. Profesional, cepat, dan transparan.
             </p>

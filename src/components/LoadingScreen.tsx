@@ -81,7 +81,7 @@ const LoadingScreen: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="text-white text-3xl md:text-5xl font-sen font-black tracking-[0.25em]"
             >
-              PT. NUANSA <span className="text-primary">BERKAH SEJAHTERA</span>
+              NUANSA <span className="text-primary">LEGAL</span>
             </motion.h1>
           </div>
           <div className="overflow-hidden mt-3">
@@ -89,7 +89,7 @@ const LoadingScreen: React.FC = () => {
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/60 text-sm md:text-base font-medium tracking-[0.15em] uppercase"
+              className="text-white/80 text-sm md:text-base font-bold tracking-[0.15em] uppercase"
             >
               Kantor Hukum Nuansa Legal dan Rekan
             </motion.p>
