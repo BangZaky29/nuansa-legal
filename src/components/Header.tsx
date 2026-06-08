@@ -10,7 +10,7 @@ const Header: React.FC = () => {
   const [isLayananHovered, setIsLayananHovered] = useState(false);
   const [isMobileLayananOpen, setIsMobileLayananOpen] = useState(false);
   const { images } = useImages('other');
-  const logo = images.find(img => img.name.includes('LOGO-NUANSA-LEGAL'))?.url || '';
+  const logo = images.find(img => img.name.includes('LOGO-NUANSA-LEGAL'))?.url || '/LOGO-NUANSA-LEGAL.jpeg';
   const location = useLocation();
 
   useEffect(() => {
@@ -43,13 +43,13 @@ const Header: React.FC = () => {
               whileHover={{ rotate: 5, scale: 1.05 }}
               className="relative"
             >
-              {logo && (
-                <img src={logo} alt="PT. Nuansa Berkah Sejahtera" className="h-10 md:h-12 w-auto rounded-xl shadow-lg border border-white/20" />
-              )}
+              <img src={logo} alt="PT. Nuansa Berkah Sejahtera" className="h-10 md:h-12 w-auto rounded-xl shadow-lg border border-white/20" />
             </motion.div>
-            <span className={`font-sen font-black text-xl md:text-2xl transition-colors duration-300 ${textColorClass}`}>
-              NUANSA LEGAL
-            </span>
+            <div className="flex items-center gap-2">
+              <span className={`font-sen font-black text-xl md:text-2xl transition-colors duration-300 ${textColorClass}`}>
+                NUANSA LEGAL
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
