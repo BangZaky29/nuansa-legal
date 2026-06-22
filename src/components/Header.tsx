@@ -7,8 +7,6 @@ import { useImages } from '../hooks/useImages';
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLayananHovered, setIsLayananHovered] = useState(false);
-  const [isMobileLayananOpen, setIsMobileLayananOpen] = useState(false);
   const { images } = useImages('other');
   const logo = images.find(img => img.name.includes('LOGO-NUANSA-LEGAL'))?.url || '/LOGO-NUANSA-LEGAL.jpeg';
   const location = useLocation();
