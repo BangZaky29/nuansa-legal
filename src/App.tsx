@@ -28,6 +28,7 @@ const Team = lazyRetry(() => import('./pages/Team'));
 const Artikel = lazyRetry(() => import('./pages/Artikel'));
 const PrivacyPolicy = lazyRetry(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazyRetry(() => import('./pages/TermsOfService'));
+const Verifikasi = lazyRetry(() => import('./pages/Verifikasi'));
 
 import { DataProvider } from './context/DataContext';
 
@@ -82,6 +83,7 @@ const AppContent: React.FC = () => {
             <Route path="kontak-kami" element={<KontakKami />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="terms-of-service" element={<TermsOfService />} />
+            <Route path="verifikasi" element={<Verifikasi />} />
             <Route path="*" element={<Home />} />
           </Route>
         </Routes>

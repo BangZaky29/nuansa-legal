@@ -22,13 +22,42 @@ const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Layanan', path: '/layanan' },
-    { name: 'Promo', path: '/promo' },
-    { name: 'Tim Kami', path: '/team' },
-    { name: 'Artikel', path: '/artikel' },
-    { name: 'Kontak Kami', path: '/kontak-kami' },
+    { name: 'Beranda', path: '/' },
+    { 
+      name: 'Sertifikasi', 
+      isDropdown: true,
+      items: [
+        { name: 'Sertifikasi ISO 9001:2015', path: '/layanan', desc: 'Sistem Manajemen Mutu' },
+        { name: 'Sertifikasi ISO 14001:2015', path: '/layanan', desc: 'Sistem Manajemen Lingkungan' },
+        { name: 'Sertifikasi ISO 45001:2018', path: '/layanan', desc: 'Sistem Manajemen K3' },
+        { name: 'Sertifikasi ISO 27001:2022', path: '/layanan', desc: 'Sistem Manajemen Keamanan Informasi' },
+        { name: 'Pendirian Badan Usaha', path: '/layanan', desc: 'PT, CV, Yayasan, PMA' },
+        { name: 'Legalitas Usaha & NIB', path: '/layanan', desc: 'Izin Usaha, OSS RBA' }
+      ]
+    },
+    { 
+      name: 'Pelatihan', 
+      isDropdown: true,
+      items: [
+        { name: 'Pelatihan Auditor Internal', path: '/layanan', desc: 'Pelatihan untuk Auditor ISO' },
+        { name: 'Awareness K3 & Fire Safety', path: '/layanan', desc: 'Keselamatan dan Kesehatan Kerja' },
+        { name: 'Seminar Bisnis & UMKM', path: '/layanan', desc: 'Pelatihan Legalitas untuk UMKM' }
+      ]
+    },
+    { 
+      name: 'Referensi', 
+      isDropdown: true,
+      items: [
+        { name: 'Permohonan Legalitas', path: '/layanan', desc: 'Formulir Permohonan' },
+        { name: 'Kajian Dokumen Legal', path: '/layanan', desc: 'Pengecekan Dokumen' }
+      ]
+    },
+    { name: 'Kontak', path: '/kontak-kami' },
+    { name: 'Verifikasi', path: '/verifikasi' },
   ];
+
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
 
   // Determine if the current page has a dark hero background
   const isHome = location.pathname === '/';
@@ -53,53 +82,42 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-8 lg:gap-10">
             {navLinks.map((link) => {
-              if (link.name === 'Layanan') {
-                const isActive = location.pathname === '/layanan' || location.pathname === '/virtual-office' || location.pathname === '/layanan-ppat';
+              if (link.isDropdown) {
+                const isActive = false; // logic to determine if path is inside dropdown
                 return (
                   <div
                     key={link.name}
                     className="relative py-2"
-                    onMouseEnter={() => setIsLayananHovered(true)}
-                    onMouseLeave={() => setIsLayananHovered(false)}
+                    onMouseEnter={() => setActiveDropdown(link.name)}
+                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <button
                       className={`font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:text-primary flex items-center gap-1.5 ${isActive ? 'text-primary' : textColorClass
                         }`}
                     >
-                      <span>Layanan</span>
-                      <ChevronDown size={14} className={`transition-transform duration-300 ${isLayananHovered ? 'rotate-180 text-primary' : ''}`} />
+                      <span>{link.name}</span>
+                      <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === link.name ? 'rotate-180 text-primary' : ''}`} />
                     </button>
                     <AnimatePresence>
-                      {isLayananHovered && (
+                      {activeDropdown === link.name && (
                         <motion.div
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
                           className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl py-3 z-[100] overflow-hidden"
                         >
-                          <Link
-                            to="/layanan"
-                            className="flex flex-col px-5 py-3 hover:bg-primary/10 transition-colors text-left group/item border-b border-gray-50"
-                          >
-                            <span className="font-bold text-sm text-secondary group-hover/item:text-primary transition-colors">Layanan Legalitas Bisnis</span>
-                            <span className="text-[10px] text-gray-500 font-medium mt-1 leading-snug">Pendirian PT, CV, perizinan, dan lisensi legalitas usaha.</span>
-                          </Link>
-                          <Link
-                            to="/virtual-office"
-                            className="flex flex-col px-5 py-3 hover:bg-primary/10 transition-colors text-left group/item border-b border-gray-50"
-                          >
-                            <span className="font-bold text-sm text-secondary group-hover/item:text-primary transition-colors">Layanan Virtual Office</span>
-                            <span className="text-[10px] text-gray-500 font-medium mt-1 leading-snug">Sewa alamat kantor prestisius di Senayan, Jakarta Pusat.</span>
-                          </Link>
-                          <Link
-                            to="/layanan-ppat"
-                            className="flex flex-col px-5 py-3 hover:bg-primary/10 transition-colors text-left group/item"
-                          >
-                            <span className="font-bold text-sm text-secondary group-hover/item:text-primary transition-colors">Layanan PPAT & Inspeksi</span>
-                            <span className="text-[10px] text-gray-500 font-medium mt-1 leading-snug">Urus sertifikat tanah, akta PPAT resmi, audit struktur & SLF.</span>
-                          </Link>
+                          {link.items?.map((item, idx) => (
+                            <Link
+                              key={idx}
+                              to={item.path}
+                              className={`flex flex-col px-5 py-3 hover:bg-primary/10 transition-colors text-left group/item ${idx !== link.items!.length - 1 ? 'border-b border-gray-50' : ''}`}
+                            >
+                              <span className="font-bold text-sm text-secondary group-hover/item:text-primary transition-colors">{item.name}</span>
+                              <span className="text-[10px] text-gray-500 font-medium mt-1 leading-snug">{item.desc}</span>
+                            </Link>
+                          ))}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -109,7 +127,7 @@ const Header: React.FC = () => {
               return (
                 <Link
                   key={link.name}
-                  to={link.path}
+                  to={link.path || '/'}
                   className={`font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:text-primary relative group ${location.pathname === link.path ? 'text-primary' : textColorClass
                     }`}
                 >
@@ -152,59 +170,43 @@ const Header: React.FC = () => {
           >
             <div className="flex flex-col p-6 gap-6">
               {navLinks.map((link) => {
-                if (link.name === 'Layanan') {
-                  const isActive = location.pathname === '/layanan' || location.pathname === '/virtual-office' || location.pathname === '/layanan-ppat';
+                if (link.isDropdown) {
+                  const isActive = false;
+                  const isMobileOpen = mobileDropdown === link.name;
                   return (
                     <div key={link.name} className="flex flex-col gap-2">
                       <button
                         className={`font-black text-xl flex items-center justify-between group w-full text-left ${isActive ? 'text-primary' : 'text-secondary'
                           }`}
-                        onClick={() => setIsMobileLayananOpen(!isMobileLayananOpen)}
+                        onClick={() => setMobileDropdown(isMobileOpen ? null : link.name)}
                       >
-                        <span>Layanan</span>
-                        <ChevronDown size={22} className={`transition-transform duration-300 ${isMobileLayananOpen ? 'rotate-180 text-primary' : 'text-secondary'}`} />
+                        <span>{link.name}</span>
+                        <ChevronDown size={22} className={`transition-transform duration-300 ${isMobileOpen ? 'rotate-180 text-primary' : 'text-secondary'}`} />
                       </button>
                       <AnimatePresence>
-                        {isMobileLayananOpen && (
+                        {isMobileOpen && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             className="overflow-hidden flex flex-col pl-4 gap-3 border-l-2 border-primary/30 mt-2"
                           >
-                            <Link
-                              to="/layanan"
-                              className={`font-bold text-base flex items-center justify-between py-1.5 ${location.pathname === '/layanan' ? 'text-primary' : 'text-secondary/70'}`}
-                              onClick={() => {
-                                setIsOpen(false);
-                                setIsMobileLayananOpen(false);
-                              }}
-                            >
-                              <span>Layanan Legalitas Bisnis</span>
-                              <span>→</span>
-                            </Link>
-                            <Link
-                              to="/virtual-office"
-                              className={`font-bold text-base flex items-center justify-between py-1.5 ${location.pathname === '/virtual-office' ? 'text-primary' : 'text-secondary/70'}`}
-                              onClick={() => {
-                                setIsOpen(false);
-                                setIsMobileLayananOpen(false);
-                              }}
-                            >
-                              <span>Layanan Virtual Office</span>
-                              <span>→</span>
-                            </Link>
-                            <Link
-                              to="/layanan-ppat"
-                              className={`font-bold text-base flex items-center justify-between py-1.5 ${location.pathname === '/layanan-ppat' ? 'text-primary' : 'text-secondary/70'}`}
-                              onClick={() => {
-                                setIsOpen(false);
-                                setIsMobileLayananOpen(false);
-                              }}
-                            >
-                              <span>Layanan PPAT & Inspeksi</span>
-                              <span>→</span>
-                            </Link>
+                            {link.items?.map((item, idx) => (
+                              <Link
+                                key={idx}
+                                to={item.path}
+                                className={`font-bold text-base flex flex-col py-1.5 ${location.pathname === item.path ? 'text-primary' : 'text-secondary/70'}`}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  setMobileDropdown(null);
+                                }}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span>{item.name}</span>
+                                  <span>→</span>
+                                </div>
+                              </Link>
+                            ))}
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -214,11 +216,11 @@ const Header: React.FC = () => {
                 return (
                   <Link
                     key={link.name}
-                    to={link.path}
+                    to={link.path || '/'}
                     className={`font-black text-xl flex items-center justify-between group ${location.pathname === link.path ? 'text-primary' : 'text-secondary'}`}
                     onClick={() => {
                       setIsOpen(false);
-                      setIsMobileLayananOpen(false);
+                      setMobileDropdown(null);
                     }}
                   >
                     {link.name}

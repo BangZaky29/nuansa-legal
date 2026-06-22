@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Zap, Award, CheckCircle2, ArrowRight, Users, Briefcase, Scale, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Shield, Zap, Award, CheckCircle2, ArrowRight, Users, Briefcase, Scale, MessageSquare, ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import FAQ from '../components/FAQ';
 import OurTeam from '../components/OurTeam';
 import SEO from '../components/SEO';
@@ -13,6 +13,15 @@ const Home: React.FC = () => {
   const { images: heroImages } = useImages('hero');
   const { images: aboutImages } = useImages('about');
   const { articles, loading: loadingArticles } = useArticles();
+  const navigate = useNavigate();
+  const [certSearchQuery, setCertSearchQuery] = useState('');
+
+  const handleCertSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (certSearchQuery.trim()) {
+      navigate(`/verifikasi?q=${encodeURIComponent(certSearchQuery.trim())}`);
+    }
+  };
 
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -52,6 +61,18 @@ const Home: React.FC = () => {
       icon: <CheckCircle2 className="w-8 h-8" />,
       color: 'bg-green-500',
     },
+  ];
+
+  const sertifikasiList = [
+    { title: 'ISO 9001:2015', desc: 'Sistem Manajemen Mutu', icon: '🏆' },
+    { title: 'ISO 14001:2015', desc: 'Sistem Manajemen Lingkungan', icon: '🌿' },
+    { title: 'ISO 45001:2018', desc: 'Sistem Manajemen K3', icon: '👷' },
+    { title: 'ISO 37001:2016', desc: 'Sistem Manajemen Anti Penyuapan', icon: '⚖️' },
+    { title: 'ISO 27001:2022', desc: 'Sistem Manajemen Keamanan Informasi', icon: '🔒' },
+    { title: 'ISO 50001:2018', desc: 'Sistem Manajemen Energi', icon: '⚡' },
+    { title: 'ISO 13485:2016', desc: 'Sistem Manajemen Alat Kesehatan', icon: '🏥' },
+    { title: 'ISO 22000:2018', desc: 'Sistem Manajemen Keamanan Pangan', icon: '🍽️' },
+    { title: 'ISO 21001:2018', desc: 'Sistem Manajemen Pendidikan', icon: '🎓' }
   ];
 
   return (
@@ -310,6 +331,82 @@ const Home: React.FC = () => {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Sertifikasi Grid Section */}
+      <section className="py-24 bg-white overflow-hidden border-t border-gray-100">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16 max-w-3xl mx-auto"
+          >
+            <span className="inline-block py-1.5 px-4 rounded-full bg-primary/10 text-primary font-bold text-sm mb-4 border border-primary/20">
+              Standar Internasional
+            </span>
+            <h2 className="text-3xl md:text-5xl font-sen font-bold text-secondary mb-4">Layanan Sertifikasi</h2>
+            <p className="text-gray-600 text-lg mb-8">Tingkatkan kredibilitas dan kepercayaan pelanggan terhadap bisnis Anda dengan sertifikasi standar internasional.</p>
+            
+            <form onSubmit={handleCertSearch} className="flex flex-col md:flex-row gap-3 max-w-xl mx-auto shadow-xl p-2 bg-white rounded-3xl border border-gray-100">
+              <div className="relative flex-1">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  value={certSearchQuery}
+                  onChange={(e) => setCertSearchQuery(e.target.value)}
+                  placeholder="Cek Sertifikat (Contoh: NL-2026-9001...)"
+                  className="w-full pl-11 pr-4 py-3 rounded-2xl bg-gray-50 border-transparent focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-gray-700 text-sm md:text-base font-medium"
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-primary hover:bg-primary-dark text-secondary font-bold py-3 px-6 rounded-2xl flex items-center justify-center transition-all disabled:opacity-70 whitespace-nowrap"
+              >
+                Cari Data
+              </button>
+            </form>
+            <p className="mt-4 text-sm text-gray-500">
+              Coba tes dengan No. Sertifikat Dummy: <span className="font-mono text-primary font-bold cursor-pointer hover:underline" onClick={() => setCertSearchQuery('NL-2026-9001-001')}>NL-2026-9001-001</span>, <span className="font-mono text-primary font-bold cursor-pointer hover:underline" onClick={() => setCertSearchQuery('NL-2026-14001-088')}>NL-2026-14001-088</span>, atau <span className="font-mono text-primary font-bold cursor-pointer hover:underline" onClick={() => setCertSearchQuery('123')}>123</span>
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mt-12">
+            {sertifikasiList.map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="group bg-white p-6 rounded-3xl border-2 border-gray-50 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300"
+              >
+                <Link to="/layanan" className="flex items-center gap-5">
+                  <div className="w-16 h-16 shrink-0 bg-primary/10 rounded-2xl flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    {item.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-lg font-bold text-secondary mb-1 group-hover:text-primary transition-colors">{item.title}</h4>
+                    <p className="text-sm text-gray-500 leading-tight">{item.desc}</p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <Link to="/layanan" className="inline-flex items-center gap-2 bg-secondary text-white font-bold py-3 px-8 rounded-full hover:bg-navy transition-colors shadow-lg">
+              Lihat Selengkapnya <ArrowRight size={18} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
