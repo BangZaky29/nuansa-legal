@@ -64,15 +64,15 @@ const Home: React.FC = () => {
   ];
 
   const sertifikasiList = [
-    { title: 'ISO 9001:2015', desc: 'Sistem Manajemen Mutu', icon: '🏆' },
-    { title: 'ISO 14001:2015', desc: 'Sistem Manajemen Lingkungan', icon: '🌿' },
-    { title: 'ISO 45001:2018', desc: 'Sistem Manajemen K3', icon: '👷' },
-    { title: 'ISO 37001:2016', desc: 'Sistem Manajemen Anti Penyuapan', icon: '⚖️' },
-    { title: 'ISO 27001:2022', desc: 'Sistem Manajemen Keamanan Informasi', icon: '🔒' },
-    { title: 'ISO 50001:2018', desc: 'Sistem Manajemen Energi', icon: '⚡' },
-    { title: 'ISO 13485:2016', desc: 'Sistem Manajemen Alat Kesehatan', icon: '🏥' },
-    { title: 'ISO 22000:2018', desc: 'Sistem Manajemen Keamanan Pangan', icon: '🍽️' },
-    { title: 'ISO 21001:2018', desc: 'Sistem Manajemen Pendidikan', icon: '🎓' }
+    { title: 'ISO 9001:2015', desc: 'Sistem Manajemen Mutu', icon: '🏆', path: '/sertifikasi/iso-9001' },
+    { title: 'ISO 14001:2015', desc: 'Sistem Manajemen Lingkungan', icon: '🌿', path: '/sertifikasi/iso-14001' },
+    { title: 'ISO 45001:2018', desc: 'Sistem Manajemen K3', icon: '👷', path: '/sertifikasi/iso-45001' },
+    { title: 'ISO 37001:2016', desc: 'Sistem Manajemen Anti Penyuapan', icon: '⚖️', path: '/sertifikasi/iso-37001' },
+    { title: 'ISO 27001:2022', desc: 'Sistem Manajemen Keamanan Informasi', icon: '🔒', path: '/sertifikasi/iso-27001' },
+    { title: 'ISO 50001:2018', desc: 'Sistem Manajemen Energi', icon: '⚡', path: '/sertifikasi/iso-50001' },
+    { title: 'ISO 13485:2016', desc: 'Sistem Manajemen Alat Kesehatan', icon: '🏥', path: '/sertifikasi/iso-13485' },
+    { title: 'ISO 22000:2018', desc: 'Sistem Manajemen Keamanan Pangan', icon: '🍽️', path: '/sertifikasi/iso-22000' },
+    { title: 'ISO 21001:2018', desc: 'Sistem Manajemen Pendidikan', icon: '🎓', path: '/sertifikasi/iso-21001' }
   ];
 
   return (
@@ -384,7 +384,7 @@ const Home: React.FC = () => {
                 transition={{ delay: idx * 0.05 }}
                 className="group bg-white p-6 rounded-3xl border-2 border-gray-50 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300"
               >
-                <Link to="/layanan" className="flex items-center gap-5">
+                <Link to={item.path} className="flex items-center gap-5">
                   <div className="w-16 h-16 shrink-0 bg-primary/10 rounded-2xl flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                     {item.icon}
                   </div>
@@ -403,7 +403,7 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <Link to="/layanan" className="inline-flex items-center gap-2 bg-secondary text-white font-bold py-3 px-8 rounded-full hover:bg-navy transition-colors shadow-lg">
+            <Link to="/sertifikasi/iso-14001" className="inline-flex items-center gap-2 bg-secondary text-white font-bold py-3 px-8 rounded-full hover:bg-navy transition-colors shadow-lg">
               Lihat Selengkapnya <ArrowRight size={18} />
             </Link>
           </motion.div>

@@ -29,6 +29,10 @@ const Artikel = lazyRetry(() => import('./pages/Artikel'));
 const PrivacyPolicy = lazyRetry(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazyRetry(() => import('./pages/TermsOfService'));
 const Verifikasi = lazyRetry(() => import('./pages/Verifikasi'));
+const SertifikasiDetail = lazyRetry(() => import('./pages/SertifikasiDetail'));
+const PelayananDetail = lazyRetry(() => import('./pages/PelayananDetail'));
+const PelatihanDetail = lazyRetry(() => import('./pages/PelatihanDetail'));
+const ReferensiDetail = lazyRetry(() => import('./pages/ReferensiDetail'));
 
 import { DataProvider } from './context/DataContext';
 
@@ -84,6 +88,14 @@ const AppContent: React.FC = () => {
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="terms-of-service" element={<TermsOfService />} />
             <Route path="verifikasi" element={<Verifikasi />} />
+            <Route path="sertifikasi/:id" element={<SertifikasiDetail />} />
+            <Route path="sertifikasi" element={<SertifikasiDetail />} />
+            <Route path="pelayanan/:id" element={<PelayananDetail />} />
+            <Route path="pelayanan" element={<PelayananDetail />} />
+            <Route path="pelatihan/:id" element={<PelatihanDetail />} />
+            <Route path="pelatihan" element={<PelatihanDetail />} />
+            <Route path="referensi/:id" element={<ReferensiDetail />} />
+            <Route path="referensi" element={<ReferensiDetail />} />
             <Route path="*" element={<Home />} />
           </Route>
         </Routes>

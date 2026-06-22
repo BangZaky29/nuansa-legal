@@ -25,29 +25,35 @@ const Header: React.FC = () => {
       name: 'Sertifikasi', 
       isDropdown: true,
       items: [
-        { name: 'Sertifikasi ISO 9001:2015', path: '/layanan', desc: 'Sistem Manajemen Mutu' },
-        { name: 'Sertifikasi ISO 14001:2015', path: '/layanan', desc: 'Sistem Manajemen Lingkungan' },
-        { name: 'Sertifikasi ISO 45001:2018', path: '/layanan', desc: 'Sistem Manajemen K3' },
-        { name: 'Sertifikasi ISO 27001:2022', path: '/layanan', desc: 'Sistem Manajemen Keamanan Informasi' },
-        { name: 'Pendirian Badan Usaha', path: '/layanan', desc: 'PT, CV, Yayasan, PMA' },
-        { name: 'Legalitas Usaha & NIB', path: '/layanan', desc: 'Izin Usaha, OSS RBA' }
+        { name: 'Sertifikasi ISO 9001:2015', path: '/sertifikasi/iso-9001', desc: 'Sistem Manajemen Mutu' },
+        { name: 'Sertifikasi ISO 14001:2015', path: '/sertifikasi/iso-14001', desc: 'Sistem Manajemen Lingkungan' },
+        { name: 'Sertifikasi ISO 45001:2018', path: '/sertifikasi/iso-45001', desc: 'Sistem Manajemen K3' },
+        { name: 'Sertifikasi ISO 27001:2022', path: '/sertifikasi/iso-27001', desc: 'Sistem Manajemen Keamanan Informasi' }
+      ]
+    },
+    {
+      name: 'Pelayanan',
+      isDropdown: true,
+      items: [
+        { name: 'Pendirian Badan Usaha', path: '/pelayanan/pendirian-badan-usaha', desc: 'PT, CV, Yayasan, PMA' },
+        { name: 'Legalitas Usaha & NIB', path: '/pelayanan/legalitas-nib', desc: 'Izin Usaha, OSS RBA' }
       ]
     },
     { 
       name: 'Pelatihan', 
       isDropdown: true,
       items: [
-        { name: 'Pelatihan Auditor Internal', path: '/layanan', desc: 'Pelatihan untuk Auditor ISO' },
-        { name: 'Awareness K3 & Fire Safety', path: '/layanan', desc: 'Keselamatan dan Kesehatan Kerja' },
-        { name: 'Seminar Bisnis & UMKM', path: '/layanan', desc: 'Pelatihan Legalitas untuk UMKM' }
+        { name: 'Pelatihan Auditor Internal', path: '/pelatihan/auditor-internal', desc: 'Pelatihan untuk Auditor ISO' },
+        { name: 'Awareness K3 & Fire Safety', path: '/pelatihan/awareness-k3', desc: 'Keselamatan dan Kesehatan Kerja' },
+        { name: 'Seminar Bisnis & UMKM', path: '/pelatihan/seminar-bisnis', desc: 'Pelatihan Legalitas untuk UMKM' }
       ]
     },
     { 
       name: 'Referensi', 
       isDropdown: true,
       items: [
-        { name: 'Permohonan Legalitas', path: '/layanan', desc: 'Formulir Permohonan' },
-        { name: 'Kajian Dokumen Legal', path: '/layanan', desc: 'Pengecekan Dokumen' }
+        { name: 'Permohonan Legalitas', path: '/referensi/permohonan-legalitas', desc: 'Formulir Permohonan' },
+        { name: 'Kajian Dokumen Legal', path: '/referensi/kajian-dokumen', desc: 'Pengecekan Dokumen' }
       ]
     },
     { name: 'Kontak', path: '/kontak-kami' },
