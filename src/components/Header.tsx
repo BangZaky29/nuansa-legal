@@ -21,8 +21,8 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Beranda', path: '/' },
-    { 
-      name: 'Sertifikasi', 
+    {
+      name: 'Sertifikasi',
       isDropdown: true,
       items: [
         { name: 'Sertifikasi ISO 9001:2015', path: '/sertifikasi/iso-9001', desc: 'Sistem Manajemen Mutu' },
@@ -36,11 +36,14 @@ const Header: React.FC = () => {
       isDropdown: true,
       items: [
         { name: 'Pendirian Badan Usaha', path: '/pelayanan/pendirian-badan-usaha', desc: 'PT, CV, Yayasan, PMA' },
-        { name: 'Legalitas Usaha & NIB', path: '/pelayanan/legalitas-nib', desc: 'Izin Usaha, OSS RBA' }
+        { name: 'Legalitas Usaha & NIB', path: '/pelayanan/legalitas-nib', desc: 'Izin Usaha, OSS RBA' },
+        { name: 'Kalkulator PPH', path: 'https://nuansasolution.id/generator-surat/calculator-PPH/', desc: 'Kalkulator Pajak Penghasilan', isExternal: true },
+        { name: 'Kalkulator Pajak Properti', path: 'https://nuansasolution.id/generator-surat/kalkulator-pajak-properti/', desc: 'Kalkulator Pajak Properti', isExternal: true },
+        { name: 'Kalkulator PBG/IMB', path: 'https://nuansasolution.id/generator-surat/kalkulator-pbg/', desc: 'Kalkulator PBG & IMB', isExternal: true }
       ]
     },
-    { 
-      name: 'Pelatihan', 
+    {
+      name: 'Pelatihan',
       isDropdown: true,
       items: [
         { name: 'Pelatihan Auditor Internal', path: '/pelatihan/auditor-internal', desc: 'Pelatihan untuk Auditor ISO' },
@@ -48,14 +51,15 @@ const Header: React.FC = () => {
         { name: 'Seminar Bisnis & UMKM', path: '/pelatihan/seminar-bisnis', desc: 'Pelatihan Legalitas untuk UMKM' }
       ]
     },
-    { 
-      name: 'Referensi', 
+    {
+      name: 'Referensi',
       isDropdown: true,
       items: [
         { name: 'Permohonan Legalitas', path: '/referensi/permohonan-legalitas', desc: 'Formulir Permohonan' },
         { name: 'Kajian Dokumen Legal', path: '/referensi/kajian-dokumen', desc: 'Pengecekan Dokumen' }
       ]
     },
+    { name: 'Promo', path: '/promo' },
     { name: 'Kontak', path: '/kontak-kami' },
     { name: 'Verifikasi', path: '/verifikasi' },
   ];
@@ -112,16 +116,35 @@ const Header: React.FC = () => {
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
                           className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl py-3 z-[100] overflow-hidden"
                         >
-                          {link.items?.map((item, idx) => (
-                            <Link
-                              key={idx}
-                              to={item.path}
-                              className={`flex flex-col px-5 py-3 hover:bg-primary/10 transition-colors text-left group/item ${idx !== link.items!.length - 1 ? 'border-b border-gray-50' : ''}`}
-                            >
-                              <span className="font-bold text-sm text-secondary group-hover/item:text-primary transition-colors">{item.name}</span>
-                              <span className="text-[10px] text-gray-500 font-medium mt-1 leading-snug">{item.desc}</span>
-                            </Link>
-                          ))}
+                          {link.items?.map((item: any, idx) => {
+                            const linkClasses = `flex flex-col px-5 py-3 hover:bg-primary/10 transition-colors text-left group/item ${idx !== link.items!.length - 1 ? 'border-b border-gray-50' : ''}`;
+
+                            if (item.isExternal) {
+                              return (
+                                <a
+                                  key={idx}
+                                  href={item.path}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={linkClasses}
+                                >
+                                  <span className="font-bold text-sm text-secondary group-hover/item:text-primary transition-colors">{item.name}</span>
+                                  <span className="text-[10px] text-gray-500 font-medium mt-1 leading-snug">{item.desc}</span>
+                                </a>
+                              );
+                            }
+
+                            return (
+                              <Link
+                                key={idx}
+                                to={item.path}
+                                className={linkClasses}
+                              >
+                                <span className="font-bold text-sm text-secondary group-hover/item:text-primary transition-colors">{item.name}</span>
+                                <span className="text-[10px] text-gray-500 font-medium mt-1 leading-snug">{item.desc}</span>
+                              </Link>
+                            );
+                          })}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -195,22 +218,45 @@ const Header: React.FC = () => {
                             exit={{ opacity: 0, height: 0 }}
                             className="overflow-hidden flex flex-col pl-4 gap-3 border-l-2 border-primary/30 mt-2"
                           >
-                            {link.items?.map((item, idx) => (
-                              <Link
-                                key={idx}
-                                to={item.path}
-                                className={`font-bold text-base flex flex-col py-1.5 ${location.pathname === item.path ? 'text-primary' : 'text-secondary/70'}`}
-                                onClick={() => {
-                                  setIsOpen(false);
-                                  setMobileDropdown(null);
-                                }}
-                              >
-                                <div className="flex items-center justify-between">
-                                  <span>{item.name}</span>
-                                  <span>→</span>
-                                </div>
-                              </Link>
-                            ))}
+                            {link.items?.map((item: any, idx) => {
+                              const linkClasses = `font-bold text-base flex flex-col py-1.5 ${location.pathname === item.path ? 'text-primary' : 'text-secondary/70'}`;
+                              const handleClick = () => {
+                                setIsOpen(false);
+                                setMobileDropdown(null);
+                              };
+
+                              if (item.isExternal) {
+                                return (
+                                  <a
+                                    key={idx}
+                                    href={item.path}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={linkClasses}
+                                    onClick={handleClick}
+                                  >
+                                    <div className="flex items-center justify-between">
+                                      <span>{item.name}</span>
+                                      <span>→</span>
+                                    </div>
+                                  </a>
+                                );
+                              }
+
+                              return (
+                                <Link
+                                  key={idx}
+                                  to={item.path}
+                                  className={linkClasses}
+                                  onClick={handleClick}
+                                >
+                                  <div className="flex items-center justify-between">
+                                    <span>{item.name}</span>
+                                    <span>→</span>
+                                  </div>
+                                </Link>
+                              );
+                            })}
                           </motion.div>
                         )}
                       </AnimatePresence>

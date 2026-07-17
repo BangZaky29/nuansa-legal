@@ -117,7 +117,10 @@ const Home: React.FC = () => {
                 <Link to="/layanan" className="bg-primary hover:bg-primary-dark text-secondary font-black py-4 px-10 rounded-xl shadow-2xl transition-all transform hover:-translate-y-1 flex items-center gap-2">
                   Mulai Sekarang <ArrowRight size={20} />
                 </Link>
-                <Link to="/kontak-kami" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-bold py-4 px-10 rounded-xl border border-white/20 transition-all">
+                <Link to="/promo" className="bg-secondary/80 hover:bg-secondary text-primary font-bold py-4 px-10 rounded-xl border border-primary/50 transition-all transform hover:-translate-y-1 flex items-center gap-2 shadow-xl backdrop-blur-md">
+                  Cek Promo <Award size={20} />
+                </Link>
+                <Link to="/kontak-kami" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-bold py-4 px-10 rounded-xl border border-white/20 transition-all flex items-center gap-2">
                   Konsultasi Gratis
                 </Link>
               </div>
